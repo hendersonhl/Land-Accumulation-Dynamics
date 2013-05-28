@@ -4,12 +4,8 @@
 
 % Word target: 7,500 words
 
-% I.    Introduction (~750) (currently ~700)
-%  	a. Why do we care about the distribution of land?
-% 	b. Why do we care about distribution dynamics as opposed to statics?
-%  	c. Gibrat's Law is leading theory of dynamics 
-% 	d. Contribution and overview of paper
-% II. Theoretical background (~1,250 words) (currently 1,000)
+% I.   Introduction (~750) (currently ~700)
+% II. Theoretical background (~1,300 words) (currently 1,300)
 % III. Background and Data (~1,500 words) (currently 1,000)
 %        a. Paraguay background
 %	 b. Census data
@@ -23,22 +19,21 @@
 % VI. Conclusion (~500 words) 
 
 % To do:
-% (1) Define accumulation
-% (2) Write abstract
-% (3) Introduction:
+% (1) Write abstract
+% (2) Introduction:
 %	- Add more titling content
-% (4) Theoretical background:
-% (5) Data section:
+% (3) Data section:
 %	- Add census stuff
-% (6) Methodology section:
+% (4) Methodology section:
 %	- Clarify how instruments enter moments (especially those strictly 
 %          exogenous) (redundancy as well)
 %       - Highlight importance of time-invariant factors
 %       - Discuss number of instruments issues
-% (7) Results:
+%       - Discuss specific hypotheses
+% (5) Results:
 %       - Re-run results
 %	- Generate select graphs
-% (8) Write conclusions
+% (6) Write conclusions
 
 % Notes:
 % (1) Gibrat's Law
@@ -208,6 +203,12 @@ In stark contrast, it appears that \citet{shergill1991} -- who found support for
 Gibrat's Law for the case of India -- is the only empirical analysis to date set 
 within the context of developing country agriculture.
 
+%%% Policy discussion here
+% Issues may have bearing on existing policies
+% Tenure reform is very popular
+% Theoretical reasons it may be equality-inducing and -reducing
+% Carter and Olinto
+
 In this context, we seek to further the literature examining the causes of 
 inegalitarian distributions of agricultural landholdings in developing 
 countries.
@@ -243,7 +244,7 @@ The theories considered are six-fold and are classified by the primary
 phenomenon invoked: (1) stochastic growth processes; 
 (2) factor market imperfections; (3) institutional/legal considerations; 
 (4) the life cycle hypothesis; (5) heterogeneous managerial experience; and 
-(6) human capital effects. 
+(6) differential human capital. 
 In what follows we discuss each of these theories in turn, providing formal
 treatment where possible.
 
@@ -274,9 +275,9 @@ $x_{i,t}$ represents the size of farm $i$ at time $t$, $\alpha$ and $\beta$ are
 parameters to be estimated, and $u_{i,t}$ is the error term. 
 Rejection of the null hypothesis $\beta=0$ entails a rejection of Gibrat's Law \citep{weiss1999}.} 
 
-While Gibrat's Law suggests that farm growth is independent of farm size,
-\citet{carter1993} developed a theory of land market competitiveness 
-whereby factor market imperfections may induce a systematic relationship.
+Regarding factor market imperfections, \citet{carter1993} developed a theory 
+of land market competitiveness whereby a systematic relationship between farm 
+growth and farm size manifests.
 On the basis of exogenously-given land endowments, utility-maximizing 
 agents choose their optimal time allocation 
 (i.e.\ on-farm and off-farm labor) and purchased inputs 
@@ -375,7 +376,39 @@ While younger firms have more variability in growth rates, it can also be shown
 that they will grow faster, as Jovanovic demonstrated that growth is an increasing 
 function of $x_t^*/x_{t+1}^*$ and $E(x_t^*/x_{t+1}^*)>1$. 
 
-% Human capital theory here.
+Finally, the effects of human capital on land accumulation can be understood
+in terms of the structural evolution model put forth in \citet{rodgers1994}.%
+\footnote{See \citet{sumner1987} for an alternative, albeit similar, theoretical
+model.}
+Agents in the model have two human capital attributes, $x$ and $y$, where
+$x$ represents agriculture-specific human capital and $y$ represents general 
+human capital.%
+\footnote{Agriculture-specific human capital $x$ is assumed to be primarily 
+determined by learning-by-doing, though formal education may also play an 
+important role. 
+General human capital $y$ is assumed to be determined by formal education, 
+employment history, and inherent ability.}
+On the basis of such endowments, agents then choose whether to engage in 
+agricultural production or off-farm employment.
+Off-farm income $w$ is assumed to be an increasing function of general
+human capital (i.e.\ $\partial w/ \partial y > 0$). 
+Agricultural income $m$ is determined by choosing land $d$ and purchased 
+inputs $k$ to maximize profits $p x F(d,k) - rd - vk$ where $p$ is the price 
+of agricultural output, $F(\cdot)$ is a standard production function, 
+and the unit prices of $d$ and $k$ are $r$ and $v$, respectively.
+Given that the marginal products of $d$ and $k$ are increasing functions of 
+$x$, agents with relatively high $x$ will choose to farm as $m > w$.
+Agents with relatively high $y$, however, will choose off-farm employment
+ as $w > m$.
+The equilibrium distribution of land is then driven by the distribution of the 
+two types of human capital across agents.
+More interestingly, agricultural producers with relatively high $x$ likely 
+grow faster as technology adoption costs may vary inversely with human 
+capital levels.%
+\footnote{Rodgers also suggested that agricultural producers with relatively 
+high $x$ may also grow faster due to the fact that they are able to spread fixed 
+technology adoption costs over a greater quantity of output.}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%% Data %%%%%%%%%%%%%
