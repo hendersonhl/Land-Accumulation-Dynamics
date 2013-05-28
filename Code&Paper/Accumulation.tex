@@ -1,0 +1,663 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% Outline %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Word target: 7,500 words
+
+% I.    Introduction (~750) (currently ~700)
+%  	a. Why do we care about the distribution of land?
+% 	b. Why do we care about distribution dynamics as opposed to statics?
+%  	c. Gibrat's Law is leading theory of dynamics 
+% 	d. Contribution and overview of paper
+% II. Theoretical background (~1,250 words) (currently 1,000)
+% III. Background and Data (~1,500 words) (currently 1,000)
+%        a. Paraguay background
+%	 b. Census data
+%        c. Discuss CPES data
+%        d. Descriptive statistics 
+% IV. Methodology (~1,500 words) (currently 1,500)
+%	a. Basic specification
+%	b. Inadequate nature of OLS, Within Groups, IV, and Difference GMM
+%	c. Systems GMM
+% V.  Results (~1,500 words) 
+% VI. Conclusion (~500 words) 
+
+% To do:
+% (1) Define accumulation
+% (2) Write abstract
+% (3) Introduction:
+%	- Add more titling content
+% (4) Theoretical background:
+% (5) Data section:
+%	- Add census stuff
+% (6) Methodology section:
+%	- Clarify how instruments enter moments (especially those strictly 
+%          exogenous) (redundancy as well)
+%       - Highlight importance of time-invariant factors
+%       - Discuss number of instruments issues
+% (7) Results:
+%       - Re-run results
+%	- Generate select graphs
+% (8) Write conclusions
+
+% Notes:
+% (1) Gibrat's Law
+%    - Strong vs. weak form? (Bakucs pg. 792) (Sutton pg. 44)
+%    (Clark pg. 56) (Shapiro pg. 477)
+%    - Three versions of Gibrat's Law? (Bakucs pg. 792) (Sutton pg. 44)
+%    (Clark pg. 56) (Shapiro pg. 477)
+% (2) Dynamic panel models
+%    - IV style vs. GMM style instruments (Roodman pg. 24 and pg. 38)
+%    - Redundance of instruments
+%    - Orthogonal deviations (increases observation count?)
+%    - Selection
+%    - Number of instruments
+%    - First step H matrix (Roodman pg. 32)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% Preamble %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Declare document class and miscellaneous packages
+\documentclass[english]{article}
+\usepackage{natbib}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{ctable}
+\usepackage{setspace}
+\usepackage{longtable}
+\usepackage{url}
+\usepackage{moredefs,lips} 
+\usepackage{IEEEtrantools}
+\usepackage{multirow}
+\usepackage{enumerate}
+\usepackage[normalsize]{caption}
+\usepackage{afterpage}
+\usepackage[all]{nowidow}
+\usepackage{listings}
+%\usepackage{fullpage}
+\urlstyle{rm}
+
+%Hyper-references
+\usepackage{hyperref}
+\hypersetup{colorlinks, citecolor=black, filecolor=black, linkcolor=black, 
+urlcolor=black, pdftex}
+
+% Title page
+\title{Land Accumulation Dynamics in Developing Country Agriculture}
+\author{
+Heath Henderson, Leonardo Corral, Eric Simning\\
+\textit{Inter-American Development Bank} \\
+\\
+Paul Winters \\
+\textit{American University}
+\\ \\
+}
+
+\date{\today}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%% Title Page and Abstract %%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+\maketitle
+
+\begin{abstract}
+%The examination of land accumulation dynamics in developing country 
+%agriculture can shed light on the determinants of and impediments to land 
+%access among rural households and can thereby inform access-promoting 
+%policies. 
+%Gibrat's Law -- which posits that farm growth is a stochastic process, 
+%operating independently of farm size -- is one of the earliest and most 
+%influential theories of such accumulation dynamics, but has been subject to 
+%virtually no empirical scrutiny in the context of developing country 
+%agriculture. 
+%In an attempt to address this shortcoming, with unique panel data for the 
+%years 1991, 1994, 1999, 2002, and 2007, we employ a generalized method of 
+%moments (GMM) estimator for dynamic panel models to examine Gibrat's 
+%Law and potential deviations thereof for the case of Paraguay. 
+%The results suggest that farm growth indeed varies systematically with select 
+%observable characteristics (i.e.\ land operated, titled area, and family labor force), 
+%which implies a formal rejection of Gibrat's Law. 
+%However, our relatively comprehensive model cannot account for the bulk of 
+%the variation in farm growth rates, which implies that the notion of stochastic 
+%farm growth may, in fact, be viewed as a reasonable first approximation. \\
+%\\
+%\textit{Key words}: Dynamic panel models; farm growth; Gibrat's Law; Paraguay
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[ABSTRACT HERE]
+\end{abstract}
+\thispagestyle{empty}
+\end{titlepage}
+\newpage
+
+% Set citations without comma between author and year
+\bibpunct{(}{)}{;}{a}{}{,}
+
+\doublespacing
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% Introduction %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+\label{sec: intro}
+
+The distribution of agricultural landholdings in developing countries is a 
+relatively well-documented source of economic inefficiency.
+Whether due to multiplier effects \citep{mellor1976}, credit rationing 
+\citep{deininger1998}, or fostering extractive institutions 
+\citep{acemoglu2002}, inequality in the distribution of land has been linked 
+to diminished economic growth.
+Such inequality has also been found to mitigate the poverty-reducing effects 
+of existing growth, as asset-impoverished households commonly lack the capacity 
+to make productive investments \citep{deininger1998, ravallion2002, lipton2009}.
+Furthermore, due to the often-observed productivity advantage of small-scale 
+agricultural producers, it has been demonstrated that inegalitarian distributions of 
+land have adverse effects on agricultural productivity  
+\citep{eswaran1986, vollrath2007, lipton2009}.
+
+While documentation of the consequences of inequality is prevalent, the causes 
+are less well understood.
+Historically, the allocation and reallocation of agricultural landholdings in 
+developing countries has indeed been driven by inheritance and/or political
+processes \citep{binswanger1995, deininger2001, lipton2009}.
+The increasing prominence of land rental and sales markets, however, raises 
+questions regarding the forces driving land accumulation (or decumulation) 
+when private initiative is predominant
+\citep{deininger2005, deininger2008b, holden2009}.%
+\footnote{It is important here to clarify our use of the term ``accumulation.''
+We define land accumulation as ``the acquisition or gradual gathering of land 
+use rights or land access for purposes of agricultural production.''  
+Notably, this includes expansion of the farm unit via legal (e.g.\ ownership, 
+rental, or sharecropping arrangements) or extralegal (e.g.\ squatting) means.
+While we use the terms land accumulation and farm growth synonymously, 
+land accumulation appears less ambiguous as farm growth can occur along
+multiple dimensions (e.g.\ growth in the quantity or value of output, capital
+accumulation, employment increases, etc.).}
+Theories of such land accumulation dynamics have invoked stochastic growth 
+processes, factor market imperfections, or institutional/legal considerations, 
+among others, in attempting to explain observed distributional outcomes.
+Yet, with few exceptions, such theories have not been subject to empirical 
+scrutiny.%
+\footnote{Though a large body of empirical work has explored, for example, 
+the farm size-productivity relationship, the investment effects of tenure insecurity, 
+or the organizational implications of producer life cycles, little effort 
+has been devoted to examining their implications for dynamism in the 
+distribution of agricultural landholdings.
+See \citet{barrett2010} for review of the literature on the farm 
+size-productivity relationship, \citet{deininger2009} on tenure insecurity, 
+and \citet{gale1994} on the life cycle hypothesis.}
+
+Consider, for example, one of the most influential theories of firm (or farm)
+growth dynamics, which is known as ``Gibrat's Law of Proportionate Effects.'' 
+Gibrat's Law posits that firm growth is a stochastic process, operating 
+independently of firm size, and the limiting distribution of firm size is 
+log-normal \citep{gibrat1931, sutton1997}.
+The theory has received considerable empirical attention in a developed 
+country setting. 
+For example, \citet{jarrett1968}, \citet{shapiro1987}, \citet{weiss1999}, 
+and \citet{melhim2009a} rejected Gibrat's hypothesis for the cases of Australia, 
+Canada, Austria, and the United States, respectively, whereas \citet{clark1992}, \citet{fulton1995}, and \citet{melhim2009b} found evidence for the  
+theory in the contexts of Canada, Canada, and the United States, respectively.  
+In stark contrast, it appears that \citet{shergill1991} -- who found support for 
+Gibrat's Law for the case of India -- is the only empirical analysis to date set 
+within the context of developing country agriculture.
+
+In this context, we seek to further the literature examining the causes of 
+inegalitarian distributions of agricultural landholdings in developing 
+countries.
+With unique panel data from Paraguay for the years 1991, 1994, 1999, 2002, 
+and 2007, we thus employ a generalized method of moments (GMM) 
+estimator for dynamic panel models in an effort to simultaneously test the 
+leading theories of land accumulation dynamics.
+The results suggest that farm growth indeed varies systematically with select 
+observable characteristics 
+(i.e.\ land operated, titled area, and family labor force), which implies a formal 
+rejection of Gibrat's Law. 
+However, our relatively comprehensive model cannot account for the bulk of 
+the variation in farm growth rates, which suggests that the notion of 
+stochastic farm growth may be viewed as a reasonable first approximation.
+
+The rest of the paper is organized as follows: Section \ref{sec: theories} 
+elaborates upon the leading theories of land accumulation dynamics, 
+Section \ref{sec: data} provides background on Paraguay as well as discusses 
+the available data, Section \ref{sec: methodology} outlines the methodological 
+approach, Section \ref{sec: results} describes the results of the analysis, and 
+Section \ref{sec: conclusions} concludes.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% Theoretical Considerations %%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Theoretical Considerations}
+\label{sec: theories}
+
+In this section we elaborate upon the leading theories of farm growth or 
+land accumulation dynamics.  
+The theories considered are six-fold and are classified by the primary 
+phenomenon invoked: (1) stochastic growth processes; 
+(2) factor market imperfections; (3) institutional/legal considerations; 
+(4) the life cycle hypothesis; (5) heterogeneous managerial experience; and 
+(6) human capital effects. 
+In what follows we discuss each of these theories in turn, providing formal
+treatment where possible.
+
+Beginning with stochastic growth processes, one of the earliest and most 
+influential of such theories, as mentioned, is known as ``Gibrat's Law of 
+Proportionate Effects.'' 
+Put forth by Robert Gibrat in his work 
+\emph{In\'{e}galit\'{e}s \'{E}conomiques} (\citeyear{gibrat1931}), the theory
+attempts to explain the widespread appearance of skew distributions, most notably 
+with respect to firm or farm size.
+To illustrate Gibrat's Law, let $x_t$ denote firm size at time $t$ and the random 
+variable $\varepsilon_t$ denote the proportional rate of growth such that 
+$x_t = x_{t-1}(1 + \varepsilon_t) = x_{0}(1 + \varepsilon_1)(1 + \varepsilon_2) 
+\ldots (1 + \varepsilon_t)$ or $\log(x_t) \approx \log(x_{0}) + \varepsilon_1+ 
+\varepsilon_2 + \ldots + \varepsilon_t$. 
+Under the assumption that $\varepsilon$ is i.i.d.\ with mean $\mu$ and variance 
+$\sigma^2$, as $t \to \infty$ the distribution of $\log(x_t)$ is approximately 
+normal with mean $t \cdot \mu $ and variance $t \cdot \sigma^2$. 
+Thus, Gibrat contended that firm growth $g_t \equiv \log(x_t) - \log(x_{t-1}) 
+\approx \varepsilon_t$ is a stochastic process, operating independently of firm size, 
+and the limiting distribution of firm size is lognormal \citep{sutton1997}.%
+\footnote{In the wake of \emph{In\'{e}galit\'{e}s \'{E}conomiques}, 
+a wealth of empirical literature has emerged seeking to test Gibrat's Law, 
+much of which has focused on the agricultural sector and farm size growth. 
+Such empirical tests typically consist of estimating some variant of the following: 
+$\ln(x_{i,t}) - \ln(x_{i,t-1}) = \alpha + \beta \ln(x_{i,t-1}) + u_{i,t}$ where 
+$x_{i,t}$ represents the size of farm $i$ at time $t$, $\alpha$ and $\beta$ are 
+parameters to be estimated, and $u_{i,t}$ is the error term. 
+Rejection of the null hypothesis $\beta=0$ entails a rejection of Gibrat's Law \citep{weiss1999}.} 
+
+While Gibrat's Law suggests that farm growth is independent of farm size,
+\citet{carter1993} developed a theory of land market competitiveness 
+whereby factor market imperfections may induce a systematic relationship.
+On the basis of exogenously-given land endowments, utility-maximizing 
+agents choose their optimal time allocation 
+(i.e.\ on-farm and off-farm labor) and purchased inputs 
+(i.e.\ hired labor and fertilizer usage) in the presence of labor and 
+capital market imperfections.%
+\footnote{More specifically, labor market imperfections entail that hired 
+labor requires supervision and agents who seek off-farm employment face a 
+distinct probability of unemployment. 
+Credit market imperfections entail that the quantity of working capital 
+available to a given agent depends on that agent's land endowment.}
+Let $\pi(T)$ be the optimal value function where $T$ is the land endowment.%
+\footnote{For the sake of brevity, all other arguments in $\pi(\cdot)$ are 
+suppressed.}
+The reservations price for $\varepsilon$ additional hectares of land is then 
+$\rho(T) = \sum_{t=1}^{\infty} \Delta_t(T)/[1 + \mu(T + \varepsilon)]^t$
+where $\Delta_t(T) = [\pi(T + \varepsilon) - \pi(T)]/\varepsilon $ and 
+$\mu(T + \varepsilon)$ is the shadow price of capital.
+The authors found that the smallest farm units witness relatively high reservation 
+prices due to their high marginal unemployment in the labor market. 
+Medium-sized farms also demonstrated high reservation prices due to 
+their ability to mediate labor and capital market imperfections.
+Thus, ``the model identifies an agrarian structure composed of mid-sized farms,
+and poverty refuge \emph{minifundias} as a likely outcome of the unfettered
+operation of the land market'' \citep[pg.\ 1097]{carter1993}.
+
+With respect to institutional/legal considerations, \citet{carter1998b} 
+incorporated notions of tenure insecurity into a land market competitiveness 
+model similar to that described above.
+Letting $0 < \phi < 1$ denote the single-period probability that a given 
+household is dispossessed of its land, the reservation price of land becomes 
+$\rho(T) = \sum_{t=1}^{\infty} [(1 - \phi)^t \Delta_t(T, \phi)]/
+[1 + \mu(T + \varepsilon, \phi)]^t$.
+Tenure insecurity affects the reservation price formulation through three distinct
+channels: (1) the term $(1 - \phi)^t$ introduces uncertainty-based discounting 
+of future earnings; (2) the presence of $\phi$ in $\Delta_t(\cdot)$ suggests 
+that tenure insecurity may depress incremental earnings from land by affecting 
+factor allocations; and (3) the incorporation of $\phi$ in $\mu(\cdot)$ reflects 
+the fact that tenure insecurity may have credit supply effects due to the 
+collateralizability of land.
+Thus, it is evident that, all else equal, tenure insecurity reduces incentives to 
+land accumulation as $\partial \rho / \partial \phi < 0$.
+There may, however, be important interaction effects between tenure insecurity
+and land endowments as credit markets may persistently exclude the 
+lesser-endowed regardless of the legal collateralizability of their land 
+\citep{carter1988}.
+
+Turning to the life cycle hypothesis, \citet{chayanov1966} was among the first 
+to suggest that land accumulation is intimately tied to the growth of the 
+individual family. 
+Stated simply, assuming the absence of a well-functioning labor market, 
+Chayanov suggested that farm size passively adapts to the equilibrium level of 
+income of a given agricultural household, which is determined by balancing 
+the marginal utility of income and the marginal drudgery of labor. 
+The location and shape of these curves was said to be heavily influenced by 
+family size and composition, as the marginal utility of income depends upon 
+family consumption demands and the marginal drudgery of labor hinges upon 
+the size of the family work force. 
+In traversing the family life cycle,%
+\footnote{The life cycle was said to begin with the marriage of the nuclear 
+couple, then proceed through child-bearing and rearing, the entrance of the 
+children into the family work force, and finally end with the exit of the children 
+from the household to form families of their own.} 
+the family initially witnesses increasing consumption demands due to the 
+augmentation of family size, which induces a steady upward shift in the 
+marginal utility of income curve. 
+However, as the children become of working age, there then appears a 
+downward shifting of the marginal drudgery of labor curve due to the reduced 
+degree of labor intensity per worker. 
+The interaction of these forces, then, generates a persistently increasing 
+equilibrium level of income and, thus, farm size 
+\citep{harrison1975, banaji1976}. 
+
+Discussion of the relationship between managerial experience and firm 
+growth generally centers on the learning model put forth in 
+\citet{jovanovic1982}. 
+In the model, at time $t$, firms choose their output level $q_t$ so as to 
+maximize expected profits $p_t q_t - c(q_t)x_t^*$ where $p_t$ is the 
+exogenously-given output price, $c(q_t)$ is the cost function, and $x_t^*$ 
+denotes the expectation of $x_t$, which is a random variable capturing 
+efficiency considerations. 
+For a firm of type $\theta$, $x_t = \xi (\eta_t)$ where $\xi (\cdot)$ is a positive, 
+strictly increasing, and continuous function, and 
+$\eta_t = \theta + \varepsilon_t$ where $\varepsilon_t \sim N(0,\sigma^2)$. 
+While $\theta$ is unknown to a given firm, the distribution of $\theta$ across 
+firms is known. 
+Further, $\eta_t$ can be inferred by observing costs at time $t$. 
+Letting $n$ be the age of a given firm and 
+$\bar{\eta}_n = \sum_{i=1}^n \eta_i/n$, we can then write 
+$x_t^* = \int \xi(\eta)P^0(\hspace{1pt} \cdot \hspace{1pt} | 
+\hspace{1pt} \bar{\eta}_n, n)$ where $P^0(\hspace{1pt} \cdot \hspace{1pt} | 
+\hspace{1pt} \bar{\eta}_n, n)$ is the normal posterior distribution of $\eta_t$, 
+the variance of which only depends on $n$. 
+It is thus clear that $x_t^*$ converges to a constant as firms age, which implies an 
+equilibrium scale of production for mature firms. 
+While younger firms have more variability in growth rates, it can also be shown 
+that they will grow faster, as Jovanovic demonstrated that growth is an increasing 
+function of $x_t^*/x_{t+1}^*$ and $E(x_t^*/x_{t+1}^*)>1$. 
+
+% Human capital theory here.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%% Data %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Background and Data}
+\label{sec: data}
+
+Paraguay, with a gross domestic product per capita of \$2,710 and a poverty rate of 38 percent, is among the poorest countries in Latin America. Moreover, economic growth in Paraguay is intimately tied to the agricultural sector, as agriculture accounts for 24 percent of gross domestic product and 27 percent of the country's employment. Food exports, in addition, represent 87 percent of total merchandise exports \citep{wdi2012}.\footnote{The data presented above pertains to the year 2008.} With an estimated Gini coefficient of 0.93, the distribution of landholdings in Paraguay is one of the most inegalitarian in the world \citep{lipton2009}. On the one hand, 84 percent of producers operate landholdings less than 20 hectares, but account for only 4 percent of total farming area.  On the other hand, 3 percent of producers operate landholdings greater than 500 hectares and account for over 85 percent of total farm land. Compounding issues of land inequality is the existence of pervasive tenure insecurity, as approximately 27 percent of producers do not have lawful permission to use the land which they operate. Moreover, of those producers operating less than 5 hectares, 36 percent are classified as illegal squatters \citep{mag2012}. Thus, it is apparent that land access is an issue of considerable policy relevance in Paraguay.
+
+In 1991, the Land Tenure Center (LTC) at the University of Wisconsin-Madison and the \emph{Centro Paraguayo de Estudios Sociol\'{o}gicos} (CPES) administered surveys to 300 rural Paraguayan households, which were selected in accordance with a stratified, multi-stage random sampling framework. Focusing on areas where much of the country's agricultural production and land scarcity problems are concentrated, the sample was distributed across three regions of Paraguay: (1) the traditional ``\emph{minifundia}'' zone located in the department of Paraguar\'{i}, which is characterized by small plots and low soil fertility, but possesses the highest road density as well as a favorable proximity to the country's largest cities; (2) the colonization zone in the department of San Pedro, which was developed as a result of the agricultural policies of the 1960s and is characterized by higher quality soils, fewer land conflicts, but lacking infrastructure; and (3) the frontier region located in the department of Itap\'{u}a, which is characterized by the best land, the highest rainfall, and larger farms employing modern technology. Within these regions, the sample was further stratified by household land endowments (0-5, 5-10, 10-20, 20-50, and $>$50 hectares), though to ensure adequate representation of wealthier, larger farms such farm units were oversampled. 
+
+The LTC-CPES survey is panel in nature and was further administered in the years 1994, 1999, 2002, and 2007. For a variety of reasons, issues of attrition included, households were strategically added to the sample in select years. As such, the panel is unbalanced with 299, 283, 291, 214, and 446 reliable observations in the years 1991, 1994, 1999, 2002, and 2007, respectively. Importantly, 133 households were successfully surveyed in each of the five years, 73 were surveyed in four of the years, 43 in three of the years, 64 in two of the years, and the remaining households were only surveyed once. While it is evident that the number of households interviewed in each survey year is relatively small, such shortcomings are partially compensated by the depth of the interviews administered. Particularly relevant at present are the detailed modules on modes of land access, property rights, household characteristics and individual-level demographic traits, as well as production and income. For further information regarding the LTC-CPES survey see \citet{fletschner2002}, \citet{carter2003}, or \citet{schechter2007}.
+
+Table \ref{def} provides definitions for all variables utilized in the analysis and Table \ref{desc} presents select descriptive statistics. The variables defined follow directly from the discussion in Section \ref{sec: intro}, though it should be noted that the age variable utilized corresponds to the age of the farm operator, which is used as a simple proxy for the age of the farm. Focusing on Table \ref{desc}, first consider the three columns under the heading ``Land Operated.'' After calculating growth rates of operational landholdings between periods $t$ and $t+1$ for all possible observations, we partition the data into three mutually exclusive groups: those that witnessed (1) positive growth; (2) stagnation or zero growth; and (3) negative growth or decay. Presented are variables means (at time $t$) by these growth regimes. The procedure is then repeated in the columns corresponding to the heading ``Land Owned,'' except now growth rates are calculated on the basis of the quantity of land operated that is owned (see Section \ref{sec: methodology} for elaboration on the justification for this variable). It is important to note that, due to the unbalanced nature of the panel as well as the fact that a multitude of households reported no land owned, the observations utilized to calculate the variable means under each heading pertain to distinct subsamples of the available data. Accordingly, of the 1,533 observations, it is evident that we are able to retrieve growth rates for 811 (636) of the observations on the basis of land operated (land owned).
+
+Four interesting characteristics of Table \ref{desc} deserve mention. First, independent of whether growth rates are calculated on the basis of operational or ownership landholdings, it is evident that the producers in the growing regime are, on average, larger in terms of both land operated and owned, which would appear inconsistent with the hypothesized inverse farm size-farm growth association. Second, those households in the growing regimes under each heading also possess relatively greater quantities of titled land. While this is to be expected given the hypothesis put forth above, such a finding may also stem from the fact that the growing farms simply appear larger on average. Third, again under both headings, the stagnant or zero growth producers have a comparatively larger number of household members of working age as well as more dependents, which is perhaps in line with the contentions of \citet{chayanov1966} as one might expect that larger, more mature families have reached an equilibrium farm size. Finally, consistent with the model put forth in \citet{jovanovic1982}, in both cases those producers in the stagnating and decaying regimes are relatively older whereas those in the growing regime are relatively younger on average. Though, for the most part, the descriptive statistics coincide with the hypothesized relationships, a more robust empirical approach is required to formally test the theories in question.
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%        METHODOLOGY     %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Methodology}
+\label{sec: methodology}
+
+Given (1) the aforementioned empirical tests of Gibrat's Law and (2) our capacity to control for time-invariant unobservables due to the availability of panel data, consider the following autoregressive-distributed lag model: 
+\begin{equation}
+x_{1,i,t} = \beta_1 x_{1,i,t-1} + \beta_2 x_{2,i,t} + \alpha_i +  u_{i,t}
+\label{adl}
+\end{equation}
+
+\noindent
+where, for producer $i=1,2,\ldots,N$ at time $t=1,2,\ldots,T$, $x_{1,i,t}$ denotes some firm size measure, $x_{2,i,t}$ is a vector of current or lagged values of additional explanatory variables, $\alpha_i$ is the producer-specific effect, and $u_{i,t}$ is the error term, which is assumed to be serially uncorrelated and independent across producers \citep{bond2002}. While our specific empirical model is discussed in detail below, it is first instructive to consider estimation of the parameters $\beta_1$ and $\beta_2$ in a more generalized context.
+
+It is evident that estimation of Eq.\ (\ref{adl}) via OLS is inconsistent as, above all, there exists a correlation between the explanatory variable $x_{1,i,t-1}$ and the error term $\alpha_i + u_{i,t}$, which does not vanish as $N$ gets larger. The within-groups estimator can also be shown to be inconsistent as the requisite transformation introduces a correlation between the transformed $x_{1,i,t-1}$ and the transformed error term. To see this, note that the transformed $x_{1,i,t-1}$ is $x_{1,i,t-1} - \frac{1}{T-1} (x_{1,i,1} + \ldots + x_{1,i,t} + \ldots + x_{1,i,T-1})$ whereas the transformed error term is $u_{i,t} - \frac{1}{T-1} (u_{i,2} + \ldots + u_{i,t-1} + \ldots + u_{i,T})$. It is thus apparent that the component $\frac{-x_{1,i,t}}{T-1}$ in the $x_{1,i,t-1}$ transformation expression is correlated with the error term, and $\frac{-u_{i,t-1}}{T-1}$ in the disturbance transformation expression is correlated with $x_{1,i,t-1}$. Such a correlation does not dissipate as $N$ gets larger. First-difference and orthogonal deviations transformations can also eliminate the individual effects $\alpha_i$, but in both cases the correlation between the transformed $x_{1,i,t-1}$ and transformed error term persists, which again suggests that OLS estimation will yield inconsistent estimates.\footnote{In contrast to the first-difference transformation in which a lagged observation is subtracted from the contemporaneous observation, the orthogonal deviations transformation subtracts the average of all future available observations. The primary benefit of using orthogonal deviations over differencing is that data loss is minimized in unbalanced panels \citep{arellano1995}.} However, as opposed to the within-groups estimator, the first-difference and orthogonal deviations transformations do not introduce all realizations of the disturbances into the transformed equation, thereby implying that further lags of the explanatory variables are available to be used as instruments. For example, in the orthogonal deviations case, recalling that the disturbances are assumed to be serially uncorrelated and further assuming that initial conditions are predetermined,\footnote{That is, $x_{1,i,1}$ is uncorrelated with subsequent disturbances $u_{i,t}$ for $t=2,3,\ldots,T$.} $x_{1,i,t-2}$ is uncorrelated with $u_{i,t}^{\perp} = c_t\left[u_{i,t} - \frac{1}{T - t }\left(u_{i,t + 1} + \ldots + u_{i,T} \right) \right]$,\footnote{In the orthogonal deviations expression, $c_t = \sqrt{(T - t)/(T - t + 1)}$ is introduced to equalize the variances.} and the 2SLS estimator is consistent in large $N$, fixed $T$ panels \citep{anderson1982, arellano1995, bond2002, roodman2009}.
+
+While the 2SLS estimator is consistent it is not asymptotically efficient as it does not utilize all available moment conditions or account for the transformed nature of the error term. \citet{arellano1991} developed a generalized method of moments (GMM) estimator for dynamic panel models in an effort to remedy the shortcomings of the 2SLS approach. The authors noted that, for $T>3$, additional instruments are available as, for example, $x_{1,i,t-2}$ and $x_{1,i,t-3}$ can be used as instruments for the transformed equation when $t=4$ and $x_{1,i,t-2}$, $x_{1,i,t-3}$, and  $x_{1,i,t-4}$ can be used when $t=5$. In the context of a simple autoregressive model (i.e.\ $\beta_2=0$), the instrument matrix can be written as follows:
+\begin{equation}
+Z_i = \left[ 
+\begin{array}{ccccccc}
+x_{1,i,1} & 0 & 0  & \ldots  & 0 & \ldots & 0 \\\
+0 & x_{1,i,1} & x_{1,i,2}  & \ldots  & 0 & \ldots & 0 \\\
+. & . & .  & \ldots  & . & \ldots & . \\\
+0 & 0 & 0  & \ldots  & x_{1,i,1} & \ldots & x_{1,i,T-2}
+\end{array}
+\right]
+\label{z}
+\end{equation}
+
+\noindent
+where, for the $i^{th}$ entity, the rows correspond to the transformed equation for periods $t=3,4,\ldots,T$. The above is readily generalized to the case of the autoregressive-distributed lag model under consideration. While the availability of further instruments will depend on the assumptions made regarding the correlation between the additional explanatory variables and the error term (i.e.\ whether they are endogenous, predetermined, or strictly exogenous), for illustrative purposes let $x_{2,i,t}$ be scalar and endogenous. Accordingly, the vector $(x_{1,i,1}, \ldots, x_{1,i,t-2})$ can be replaced by $(x_{1,i,1}, \ldots, x_{1,i,t-2}, x_{2,i,1},\ldots,  x_{2,i,t-2})$ in forming each row of the instrument matrix. 
+
+Using orthogonal deviations as the choice transformation, the asymptotically efficient GMM estimator exploits the moment conditions $E[Z_i' u_i^\perp]=0$ for $i=1,2,\ldots,N$ where $u_i^\perp=(u_{i,3}^\perp, u_{i,4}^\perp, \ldots , u_{i,T}^\perp)'$ to minimize the following criterion:
+\begin{equation}
+J_N = \left(\frac{1}{N} \sum_{i=1}^N u_{i}^{\perp \prime} Z_i \right) W_N \left(\frac{1}{N} \sum _{i=1}^N Z_i' u_i^\perp \right)
+\end{equation}
+
+\noindent
+where
+\begin{equation}
+W_N = \left[\frac{1}{N}\sum_{i=1}^N \left(Z_i' \widehat{u}_i^\perp \widehat{u}_i^{\perp \prime} Z_i \right)  \right]^{-1}
+\end{equation}
+
+\noindent
+is the optimal weight matrix and $\widehat{u}_i^\perp$ denotes estimates of the corresponding residuals, which are calculated from a preliminary consistent estimator. As such, the method is known as a two-step GMM estimator. The dependence of the two-step weight matrix on estimated parameters, however, makes the asymptotic distribution approximations unreliable, and thus standard errors are generally calculated using the finite-sample correction put forth in \citet{windmeijer2005} \citep{arellano1991, bond2002, roodman2009}.
+
+\citet{blundell1998}, building on \citet{arellano1995}, further developed the GMM estimator outlined above. The authors noted that when the series in question has near unit root properties, the utilized instruments are likely to be weak and, thus, subject to non-trivial finite sample bias. In such situations it may be the case that past changes are more predictive of current levels than past levels are of current changes or deviations \citep{roodman2009}. To fix ideas, reconsider the simple autoregressive case (i.e.\ $\beta_2$=0). Under the assumption that changes in the instrumenting variables are uncorrelated with the fixed effects, \citeauthor{blundell1998} suggested utilizing the additional $T-2$ linear moment conditions $E[\Delta x_{1,i,t-1} (\alpha_i + u_{i,t})]$ for $i=1,2,\ldots,N$ and $t=3,4,\ldots,T$ where $\Delta x_{1,i,t-1} = x_{1,i,t-1} - x_{1,i,t-2}$. In exploiting the new moment conditions, the authors developed a ``system'' GMM estimator whereby the $T-2$ equations in orthogonal deviations (or first-differences) and the $T-2$ equations in levels are stacked and the instrument matrix is augmented as follows:
+\begin{equation}
+Z_{i}^{+} = \left[ 
+\begin{array}{ccccccc}
+Z_i  & 0 & 0 & \ldots & 0\\
+0 & \Delta x_{1,i,2} & 0 & \ldots & 0 \\
+0 & 0 & \Delta x_{1,i,3} & \ldots & 0 \\
+. & . & . & \ldots & 0 \\
+0 & 0 & 0 & \ldots & \Delta x_{1,i,T-1}
+\end{array}
+\right].
+\label{znew}
+\end{equation}
+
+\noindent
+Estimation then consists of minimizing $J_N$ after properly introducing the additional moment conditions. Further, analogous to the case of the \citeauthor{arellano1991} GMM estimator, $Z_{i}^{+}$ readily incorporates additional instruments associated with the autoregressive-distributed lag model.
+
+Turning to the empirical model, then, in line with the above discussion and the empirical literature on Gibrat's Law \citep{evans1987, sleuwaegen2002, rizov2003, dries2004b}, the following basic specification is put forth:
+\begin{equation}
+[\ln(x_{1,i,t}) - \ln(x_{1,i,t-1})]/\delta_t = \ln [g(x_{1,i,t-1}, x_{2,i,t-1}, x_{3,i,t-1}, x_{4,i,t-1}, x_{5,i,t-1})] + u_{i,t}
+\end{equation}
+
+\noindent
+where for producer $i=1,2,\ldots,N$ at time $t=1,2,\ldots,T$ the variables land operated, titled area, labor, dependents, and age are denoted by $x_{1}$, $x_{2}$, $x_{3}$, $x_{4}$, and $x_{5}$, respectively, $\delta_t$ is the number of years between the survey periods $t$ and $t-1$, and $u$ is the error term.\footnote{See Table \ref{def} for variable definitions.} Approximating the growth function $g(\cdot)$ by a second-order expansion in the logs and augmenting the basic model with producer-specific fixed effects as well as time dummies, results in the following expression:
+\begin{align}
+[\ln(x_{1,i,t}) - \ln(x_{1,i,t-1})]/\delta_t & = \alpha_i + \sum_{t=1}^{3}\theta_t d_t +\sum_{k=1}^{5}\beta_k \ln (x_{k,i,t-1})\nonumber\\
+& +\frac{1}{2}\sum_{k=1}^{5}\sum_{l=1}^{5}\beta_{kl}\ln (x_{k,i,t-1})\ln (x_{l,i,t-1})
++\sum_{k=2}^{4}\tau_k d_{k,i,t-1}+u_{i,t}
+\label{emodel}
+\end{align}
+
+\noindent
+where $\alpha$ denotes the producer-specific constant, $d_t$ represents the time dummies, $d_k$ is a dummy variable that equals one when $x_k$ takes a value of zero,\footnote{In situations where scaling is necessary to permit logarithmic transformation of zero-valued explanatory variables, \citet{battese1997} illustrated that the dummy variable method utilized here is preferable to a number of alternative approaches (e.g.\ adding an arbitrarily small constant), which can bias parameter estimates. The method is simple: recode all zero values of explanatory variables to one and include in the regression a corresponding dummy variable that takes on the value of one if that observation was recoded and zero otherwise. Note that dummy variables for land operated and age are not necessary as these variables never take on a value of zero.} and $\theta$, $\beta$, and $\tau$ are parameters to be estimated. Before moving forward, it should be noted that farm growth could alternatively be defined on the basis of other indicators such as output value, net income, livestock number, etc. However, given the stated salience of issues of land access, we confine our attention to growth in operational landholdings. Accordingly, as growth in operational landholdings can occur through a variety of channels (e.g.\ accumulation of owned land, rental arrangements, sharecropping, etc.), we attempt to explore the accumulation channels by also estimating Eq.\ (\ref{emodel}) when defining the dependent variable on the basis of operational landholdings that are owned.\footnote{An attempt was made to estimate Eq.\ (\ref{emodel}) when defining growth on the basis of unowned landholdings, but the number of available observations rendered this model infeasible.}
+
+It is evident that Eq.\ (\ref{emodel}) is simply a special case of the autoregressive-distributed lag model previously discussed. As such, utilizing orthogonal deviations to minimize data loss due to the unbalanced nature of the panel, we employ the \citet{arellano1995}/\citet{blundell1998} ``system'' GMM estimator outlined above where, with the exception of age and the time dummies which are deemed exogenous, all explanatory variables are treated as predetermined. The appropriateness of the specification rests primarily on the validity of three assumptions: (1) the lack of serial correlation in the disturbances; (2) instrumental exogeneity; and (3) the absence of selection bias. The first and second of these assumptions are readily examined via the construction of suitable hypothesis tests. As such, we explore (1) the serial independence assumption with the \citet{arellano1991} test for first-order serial correlation in the disturbances and (2) the instrumental exogeneity assumption with the \citet{hansen1982} $J$ test for overidentifying restrictions. Regarding issues of selection, ``growth rates can only be measured for surviving farms (i.e.\ those still operating in period $t$), and since slow growing farms are most like to exit the industry, it is easy to see that small, fast growing farms can easily be overrepresented in the sample, thus introducing potential bias in the results'' \citep[pg.\ 790]{bakucs2009}. While there is a clear theoretical justification for the presence of selection effects, the vast majority of the empirical literature to date suggests that the resulting bias is negligible \citep{evans1987, hall1987, weiss1999, dries2004}. Therefore, we avoid undue complication of the estimation procedure and focus on Gibrat's Law as it applies to surviving farms.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%        RESULTS      %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Results}
+\label{sec: results}
+
+Tables \ref{sysgmm} and \ref{tests} present the results from the \citet{arellano1995}/\citet{blundell1998} ``system'' GMM estimator. To reiterate, from Table \ref{sysgmm} it is evident that we estimate two primary models: (1) where growth is defined on the basis operational landholdings (land operated) and (2) where growth is defined on the basis of the quantity of operational landholdings that are reported to be owned (land owned). The regressors, however, remain identical across the two models. Note also that the number of instruments utilized, the associated $R^2$ values, and the number of observations are provided for each regression at the bottom of the corresponding column. To get an understanding of the parameter estimates as well as the validity of the underlying assumptions, however, it is beneficial to focus on Table \ref{tests}, in which we present a series of related hypothesis tests.
+
+Hypothesis test (1) in Table \ref{tests} presents the results from the \citet{arellano1991} tests for first-order serial correlation in the disturbances. With test statistics of 1.04 and -0.16 for the land operated and land owned regressions, respectively, it is evident that we fail to reject the null hypothesis of no serial correlation for both models. Hypothesis test (2) presents the results for the \citet{hansen1982} $J$ test for overidentifying restrictions, which is distributed $\chi^2$ with degrees of freedom equal to the degree of overidentification and also robust to non-sphericity in the errors. With test statistics of 151.05 and 151.10 for the two models, respectively, we fail to reject the null hypothesis that the instruments are exogenous. Thus, taken together, the Arellano-Bond and Hansen tests suggests that the underlying assumptions of serial independence and instrumental exogeneity are seemingly unproblematic.
+
+Continuing with Table \ref{tests}, hypothesis tests (3)-(7) present estimates of the marginal effect of (the natural log of) each regressor, which are evaluated at the sample means. It is evident the marginal effects on depend ($x_4$) as well as age ($x_5$) witness no statistical significance, which suggests that farm growth is seemingly independent of these covariates. Of those marginal effects that witness statistical significance (i.e.\ $x_1$, $x_2$, and $x_3$ or land operated, titled area, and labor, respectively), it appears that all signs are in accordance with the theoretical notions discussed in Section \ref{sec: intro}. With respect to $x_1$ in the land operated regression, the associated marginal effect indicates that a one percent increase in the quantity of land operated is expected to induce a statistically significant $0.0013$ (i.e.\ 0.13/100) decrease in the growth rate of operational landholdings, which is in line with the hypothesized inverse farm size-farm growth relationship and a formal rejection of Gibrat's law. Further, it can be seen that such farm growth proceeds at least partially through the accumulation of ownership landholdings, as is evident from the statistically significant marginal effect on $x_1$ in the land owned regression. Regarding $x_2$, we see that a one percent increase in titled area is expected to generate a 0.0012 increase in the growth rate of operational landholdings, an effect that, once again, is accompanied by a statistically significant increase in the growth rate of land owned. Accordingly, these results are consistent with the hypothesis that enhanced tenure security positively impacts farm growth. Finally, turning to $x_3$, it appears that a one percent increase in the family labor force is accompanied by a 0.0008 increase in the growth rate of operational landholdings. However, as opposed to the previous cases, it is evident that the marginal effect is statistically insignificant in the land owned regression. Therefore, while there is evidence that demographic changes impact farm growth, we find that the associated growth tends to occur in channels outside the accumulation of ownership landholdings (e.g.\ rental arrangements, sharecropping, etc.).
+
+The above results, overall, suggest that farm growth indeed varies systematically with select observable characteristics (i.e.\ land operated, titled area, and labor), which implies a rejection of Gibrat's Law. Perhaps more interestingly, the signs associated with the statistically significant effects empirically substantiate three of the hypotheses put forth: (1) that the inverse farm size-productivity relationship translates into an analogous inverse farm size-farm growth association; (2) that enhanced tenure security positively impacts farm growth; and (3) that labor force increases positively affect land accumulation. However, with $R^2$ values of 0.13 and 0.03 in the two models, respectively, and the evidently small magnitude of the above-discussed marginal effects, it should be noted that our relatively comprehensive model cannot account for the bulk of the variation in farm growth rates. Therefore, while we do formally reject Gibrat's Law, the notion of stochastic farm growth may, in fact, be viewed as a reasonable first approximation.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%        CONCLUSIONS      %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conclusions}
+\label{sec: conclusions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%       REFERENCES      %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Start fresh page
+\newpage
+\cleardoublepage
+\singlespacing
+
+%Declare the style of the bibliography
+\bibliographystyle{au-cms}
+
+%Specify the file to use
+\bibliography{/Users/hendersonhl/Documents/References}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%         APPENDIX        %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\doublespacing
+\section*{Appendix}
+
+%%%%%%%%%%%%%%%%%% Variable Definitions %%%%%%%%%%%%%%%%%%%%%%
+\footnotesize
+\begin{longtable}{l  p{10.5cm}}
+\caption[Variable definitions]{Variable definitions} \\[-2ex] 
+
+%This is the header for the first page of the table...
+\hline \hline \\[-5ex]
+\multicolumn{1}{l}{Variable} &
+\multicolumn{1}{c}{Definition}\\[0.0ex]   \hline
+\endfirsthead
+
+%This is the header for the remaining page(s) of the table...
+\multicolumn{2}{c}{\normalsize{\tablename} \thetable{} -- Continued} \\
+\hline \hline \\[-5ex]
+\multicolumn{1}{l}{Variable} &
+\multicolumn{1}{c}{Definition}\\[0.0ex]  
+  \\[-4.5ex]
+\endhead
+
+%This is the footer for all pages except the last page of the table...
+\multicolumn{2}{l}{{\textit{Continued on Next Page \ldots}}} \\
+\endfoot
+
+%This is the footer for the last page of the table...
+  \\[-1.8ex]
+\endlastfoot
+
+% Content
+Land Operated & All land owned plus land rented, sharecropped, or borrowed \emph{from} others less land rented, sharecropped, or borrowed \emph{to} others (hectares) \\
+
+Land Owned & Quantity of land operated that is owned (with or without formal title) (hectares)\\
+
+Titled Area & Quantity of land with legally registered, mortgageable property rights (hectares)\\
+
+Labor  & Number of household members between the ages of 15 and 64 \\
+
+Dependents & Number of household members younger than 15 or older than 64 years of age \\ 
+
+Age  & Age of the household head \\ \hline
+\label{def}
+\end{longtable}
+\normalsize
+\newpage
+
+%%%%%%%%%%%%%%%%%%  Descriptive Statistics   %%%%%%%%%%%%%%%%%%%%%%%%
+
+\footnotesize
+\ctable[
+cap = {Select descriptive statistics},
+caption = {Select descriptive statistics},
+captionskip = -2ex,
+pos=htb,
+label = {desc}
+]{lrrrrrrrr}{}{\hline \hline
+&& \multicolumn{3}{c}{Land Operated} && \multicolumn{3}{c}{Land Owned} \\ \hline
+Variable && \multicolumn{1}{c}{Growth} & \multicolumn{1}{c}{Stagnation} & \multicolumn{1}{c}{Decay} && \multicolumn{1}{c}{Growth} & \multicolumn{1}{c}{Stagnation} & \multicolumn{1}{c}{Decay} \\ \hline
+Land Operated   &&  34.40 & 28.98 & 33.53 && 44.58 & 29.54 & 38.93 \\[-1ex]
+Land Owned      &&  30.47 & 27.33 & 26.95 &&  38.43 & 28.18 & 36.47 \\[-1ex]
+Titled Area         &&  28.08 & 16.55 & 22.63 && 35.83 & 20.71 & 27.75 \\[-1ex]
+Labor                  &&    2.99 &   3.15 &   2.82 &&   3.03 &   3.27 & 2.95 \\[-1ex]
+Dependents        &&    2.64 &   2.72 &   2.52 &&   2.58 &   2.76 & 2.52  \\[-1ex]
+Age                     &&  51.48 & 53.57 & 54.01 && 53.94 & 54.13 & 56.47 \\[-1ex]
+$N$                     &&     308 &    200  &   303  &&    231 &   198 & 207 \\
+\hline}
+\normalsize
+
+%%%%%%%%%%%%%%%%%%%% Systems GMM Estimates %%%%%%%%%%%%%%%%%%%%%%
+
+\footnotesize
+\ctable[
+	cap = {System GMM estimates},
+	caption = {System GMM estimates},
+	captionskip = -2ex,
+	pos = htbp,
+	label = sysgmm
+]{lrrrrrr}{
+	\tnote[a]{P-values $<$0.01, 0.05, and 0.10 correspond to $^{***}$, $^{**}$, and $^{*}$, respectively.}
+	\tnote[b]{The subscripts $1, 2, 3$, $4$, and $5$ refer to land operated, titled area, labor, dependents, and age, respectively.}
+}{ \hline \hline
+& \multicolumn{2}{c}{Land Operated} &\multicolumn{2}{c}{Land Owned}  \\ \hline
+Variable  & \multicolumn{1}{c}{Coeff.}  &  \multicolumn{1}{c}{SE} & \multicolumn{1}{c}{Coeff.} & \multicolumn{1}{c}{SE} \\ \hline
+$d_{1991}$                         & 0.025 & 0.022 &  0.017 & 0.023 \\[-1ex]
+$d_{1994}$                          & 0.014 & 0.019 & -0.004 & 0.023  \\[-1ex]
+$d_{1999}$                          & 0.024 & 0.028 & -0.048 & 0.032 \\[-1ex]
+$\ln x_1$                              & -0.742$^{*}$ & 0.395 & -0.031 & 0.326 \\[-1ex]
+$\ln x_2$                               & 0.123 & 0.209 & -0.173 & 0.311 \\[-1ex]
+$\ln x_3$  	                         & 0.734 & 0.608 & 0.246 & 0.444 \\[-1ex]
+$\ln x_4$                                & -0.050 & 0.491 & 0.498 & 0.592 \\[-1ex]
+$\ln x_5$                                & -1.561$^{*}$ & 0.914 & -0.345 & 0.961 \\[-1ex]
+$\frac{1}{2}\ln(x_1)^2$       & 0.040$^{**}$ & 0.015 & 0.006 & 0.009 \\[-1ex]
+$\ln x_1 \times \ln x_2$        & -0.057$^{***}$ & 0.015 & -0.035$^{***}$ & 0.011 \\[-1ex]
+$\ln x_1 \times \ln x_3$       & 0.022 & 0.028 & -0.023 & 0.027 \\[-1ex]
+$\ln x_1 \times \ln x_4$       & 0.045 & 0.034 & -0.017 & 0.021 \\[-1ex]
+$\ln x_1 \times \ln x_5$        & 0.114 & 0.089 & 0.006 & 0.078 \\[-1ex]
+$\frac{1}{2}\ln(x_2)^2$       & 0.046$^{***}$ & 0.016 & 0.045$^{***}$ & 0.013 \\[-1ex]
+$\ln x_2 \times \ln x_3$       & -0.003 & 0.017 & 0.023 & 0.022 \\[-1ex]
+$\ln x_2 \times \ln x_4$       & -0.023 & 0.019 & -0.004 & 0.020 \\[-1ex]
+$\ln x_2 \times \ln x_5$       & -0.017 & 0.050 & 0.021 & 0.069 \\[-1ex]
+$\frac{1}{2}\ln(x_3)^2$	     & 0.008 & 0.038 & 0.015 & 0.031 \\[-1ex]
+$\ln x_3 \times \ln x_4$	      & -0.006 & 0.040 & -0.032 & 0.036 \\[-1ex]
+$\ln x_3 \times \ln x_5$	      & -0.185 & 0.138 & -0.052 & 0.101  \\[-1ex]
+$\frac{1}{2}\ln(x_4)^2$       & 0.010 & 0.039 & 0.009 & 0.044 \\[-1ex]
+$\ln x_4 \times \ln x_5$	      & -0.010 & 0.107 & -0.108 & 0.133  \\[-1ex]
+$\frac{1}{2}\ln(x_5)^2$       & 0.186 & 0.122 & 0.051 & 0.123 \\[-1ex]
+$d_{2}$                                  & -0.001 & 0.103 & -0.098 & 0.086 \\[-1ex]
+$d_{3}$                                  & -0.040 & 0.061 & -0.046 & 0.047 \\[-1ex]
+$d_{4}$                                   & 0.057 & 0.055 &  0.013 & 0.045  \\[-1ex]
+Instrument No.                  & \multicolumn{2}{c}{195}   &  \multicolumn{2}{c}{193}  \\[-1ex]
+$R^2$                  & \multicolumn{2}{c}{0.13}   &  \multicolumn{2}{c}{0.03}  \\[-1ex]
+$N$                  & \multicolumn{2}{c}{811}   &  \multicolumn{2}{c}{636}  \\ \hline}
+\normalsize
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%% Hypothesis Tests  %%%%%%%%%%%%%%%%%%%%%%%%
+
+\footnotesize
+\ctable[
+	cap = {Hypothesis tests},
+	caption = {Hypothesis tests},
+	captionskip = -2ex,
+	pos = htbp,
+	label = tests
+]{lrrrrrr}{
+          \tnote[a]{P-values $<$0.01, 0.05, and 0.10 correspond to $^{***}$, $^{**}$, and $^{*}$, respectively.}
+	\tnote[b]{The subscripts $1, 2, 3$, $4$, and $5$ refer to land operated, titled area, labor, dependents, and age, respectively.}
+}{ \hline \hline
+Hypothesis Test & \multicolumn{1}{c}{Land Operated} &\multicolumn{1}{c}{Land Owned}   \\ \hline
+(1)~ Arellano-Bond                      &      1.04  &   -0.16  \\[-1ex]
+(2)~ Hansen                                 &  151.05  & 151.10  \\[-1ex]
+(3)~ $\partial/\partial \ln x_1$   &   -0.13$^{***}$  & -0.11$^{***}$\\[-1ex]
+(4)~ $\partial/\partial \ln x_2$   &    0.12$^{***}$  &   0.09$^{**}$\\[-1ex]
+(5)~ $\partial/\partial \ln x_3$    &   0.08$^{**}$    &   0.04 \\[-1ex]
+(6)~ $\partial/\partial \ln x_4$    &                0.01    &  -0.02\\[-1ex]
+(7)~ $\partial/\partial \ln x_5$    &                0.05    &   0.00 \\ \hline}
+\normalsize
+
+\end{document}
