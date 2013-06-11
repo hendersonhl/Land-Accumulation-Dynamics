@@ -4,19 +4,16 @@
 
 % Word target: 7,500 words
 
-% I.   Introduction (~750) (currently ~750)
-% II. Theoretical background (~1,300 words) (currently 1,300)
+% I.   Introduction (~850) (currently ~850)
+% II. Theoretical background (~1,400 words) (currently 1,400)
 % III. Background and Data (~1,500 words) (currently 1,000)
 %        a. Paraguay background
 %	 b. Census data
 %        c. Discuss CPES data
 %        d. Descriptive statistics 
 % IV. Methodology (~1,500 words) (currently 1,500)
-%	a. Basic specification
-%	b. Inadequate nature of OLS, Within Groups, IV, and Difference GMM
-%	c. Systems GMM
 % V.  Results (~1,500 words) 
-% VI. Conclusion (~500 words) 
+% VI. Conclusion (~750 words) 
 
 % To do:
 % (1) Write abstract
@@ -28,6 +25,8 @@
 %       - Highlight importance of time-invariant factors
 %       - Discuss number of instruments issues
 %       - Discuss specific hypotheses
+%       - Fix x-y issue
+%       - Attrition issues
 % (4) Results:
 %       - Re-run results
 %	- Generate select graphs
@@ -437,22 +436,90 @@ technology adoption costs over a greater quantity of output.}
 %%%%%%%%%%%%%% Data %%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% Section outline:
+% (1) Broad overview of agricultural sector
+% (2) History of inequality and conflict
+% (3) LTC-CPES data set
+% (4) Descriptive statistics
+
 \section{Background and Data}
 \label{sec: data}
 
-Paraguay, with a gross domestic product per capita of \$2,710 and a poverty rate of 38 percent, is among the poorest countries in Latin America. Moreover, economic growth in Paraguay is intimately tied to the agricultural sector, as agriculture accounts for 24 percent of gross domestic product and 27 percent of the country's employment. Food exports, in addition, represent 87 percent of total merchandise exports \citep{wdi2012}.\footnote{The data presented above pertains to the year 2008.} With an estimated Gini coefficient of 0.93, the distribution of landholdings in Paraguay is one of the most inegalitarian in the world \citep{lipton2009}. On the one hand, 84 percent of producers operate landholdings less than 20 hectares, but account for only 4 percent of total farming area.  On the other hand, 3 percent of producers operate landholdings greater than 500 hectares and account for over 85 percent of total farm land. Compounding issues of land inequality is the existence of pervasive tenure insecurity, as approximately 27 percent of producers do not have lawful permission to use the land which they operate. Moreover, of those producers operating less than 5 hectares, 36 percent are classified as illegal squatters \citep{mag2012}. Thus, it is apparent that land access is an issue of considerable policy relevance in Paraguay.
+Before discussing the methodological approach used to examine the alternative
+hypotheses considered in the previous section, it is beneficial to elaborate upon 
+the relevance of the Paraguayan setting as well as the available data.
+As such, with special emphasis on the distribution of agricultural landholdings, 
+this section first provides an overview of Paraguay's agricultural sector. 
+After this contextual discussion, we then discuss the data collection process 
+and descriptive statistics associated with the unique panel data set used in the 
+empirical analysis.
 
-In 1991, the Land Tenure Center (LTC) at the University of Wisconsin-Madison and the \emph{Centro Paraguayo de Estudios Sociol\'{o}gicos} (CPES) administered surveys to 300 rural Paraguayan households, which were selected in accordance with a stratified, multi-stage random sampling framework. Focusing on areas where much of the country's agricultural production and land scarcity problems are concentrated, the sample was distributed across three regions of Paraguay: (1) the traditional ``\emph{minifundia}'' zone located in the department of Paraguar\'{i}, which is characterized by small plots and low soil fertility, but possesses the highest road density as well as a favorable proximity to the country's largest cities; (2) the colonization zone in the department of San Pedro, which was developed as a result of the agricultural policies of the 1960s and is characterized by higher quality soils, fewer land conflicts, but lacking infrastructure; and (3) the frontier region located in the department of Itap\'{u}a, which is characterized by the best land, the highest rainfall, and larger farms employing modern technology. Within these regions, the sample was further stratified by household land endowments (0-5, 5-10, 10-20, 20-50, and $>$50 hectares), though to ensure adequate representation of wealthier, larger farms such farm units were oversampled. 
+Paraguay, with a gross domestic product per capita of \$2,710 and a poverty 
+rate of 38 percent, is among the poorest countries in Latin America. 
+Moreover, economic growth in Paraguay is intimately tied to the agricultural 
+sector, as agriculture accounts for 24 percent of gross domestic product and 
+27 percent of the country's employment. 
+Food exports, in addition, represent 87 percent of total merchandise exports 
+\citep{wdi2012}.%
+\footnote{The data presented above pertains to the year 2008.} 
+With an estimated Gini coefficient of 0.93, the distribution of landholdings in 
+Paraguay is one of the most inegalitarian in the world \citep{lipton2009}. 
+On the one hand, 84 percent of producers operate landholdings less than 20 
+hectares, but account for only 4 percent of total farming area.  
+On the other hand, 3 percent of producers operate landholdings greater than 
+500 hectares and account for over 85 percent of total farm land. 
+Compounding issues of land inequality is the existence of pervasive tenure 
+insecurity, as approximately 27 percent of producers do not have lawful 
+permission to use the land which they operate. 
+Moreover, of those producers operating less than 5 hectares, 36 percent are 
+classified as illegal squatters \citep{mag2012}. 
 
-The LTC-CPES survey is panel in nature and was further administered in the years 1994, 1999, 2002, and 2007. For a variety of reasons, issues of attrition included, households were strategically added to the sample in select years. As such, the panel is unbalanced with 299, 283, 291, 214, and 446 reliable observations in the years 1991, 1994, 1999, 2002, and 2007, respectively. Importantly, 133 households were successfully surveyed in each of the five years, 73 were surveyed in four of the years, 43 in three of the years, 64 in two of the years, and the remaining households were only surveyed once. While it is evident that the number of households interviewed in each survey year is relatively small, such shortcomings are partially compensated by the depth of the interviews administered. Particularly relevant at present are the detailed modules on modes of land access, property rights, household characteristics and individual-level demographic traits, as well as production and income. For further information regarding the LTC-CPES survey see \citet{fletschner2002}, \citet{carter2003}, or \citet{schechter2007}.
+% More context here
 
-Table \ref{def} provides definitions for all variables utilized in the analysis and Table \ref{desc} presents select descriptive statistics. The variables defined follow directly from the discussion in Section \ref{sec: intro}, though it should be noted that the age variable utilized corresponds to the age of the farm operator, which is used as a simple proxy for the age of the farm. Focusing on Table \ref{desc}, first consider the three columns under the heading ``Land Operated.'' After calculating growth rates of operational landholdings between periods $t$ and $t+1$ for all possible observations, we partition the data into three mutually exclusive groups: those that witnessed (1) positive growth; (2) stagnation or zero growth; and (3) negative growth or decay. Presented are variables means (at time $t$) by these growth regimes. The procedure is then repeated in the columns corresponding to the heading ``Land Owned,'' except now growth rates are calculated on the basis of the quantity of land operated that is owned (see Section \ref{sec: methodology} for elaboration on the justification for this variable). It is important to note that, due to the unbalanced nature of the panel as well as the fact that a multitude of households reported no land owned, the observations utilized to calculate the variable means under each heading pertain to distinct subsamples of the available data. Accordingly, of the 1,533 observations, it is evident that we are able to retrieve growth rates for 811 (636) of the observations on the basis of land operated (land owned).
+In 1991, the Land Tenure Center (LTC) at the University of 
+Wisconsin-Madison and the \emph{Centro Paraguayo de Estudios 
+Sociol\'{o}gicos} (CPES) administered surveys to 300 rural Paraguayan 
+households, which were selected in accordance with a stratified, multi-stage 
+random sampling framework. 
+Focusing on areas where much of the country's agricultural production and 
+land scarcity problems are concentrated, the sample was distributed across three 
+regions of Paraguay: (1) the traditional ``\emph{minifundia}'' zone located in 
+the department of Paraguar\'{i}, which is characterized by small plots and low 
+soil fertility, but possesses the highest road density as well as a favorable 
+proximity to the country's largest cities; (2) the colonization zone in the 
+department of San Pedro, which was developed as a result of the agricultural 
+policies of the 1960s and is characterized by higher quality soils, fewer land 
+conflicts, but lacking infrastructure; and (3) the frontier region located in the 
+department of Itap\'{u}a, which is characterized by the best land, the highest 
+rainfall, and larger farms employing modern technology. 
+Within these regions, the sample was further stratified by household land 
+endowments (0-5, 5-10, 10-20, 20-50, and $>$50 hectares).
 
-Four interesting characteristics of Table \ref{desc} deserve mention. First, independent of whether growth rates are calculated on the basis of operational or ownership landholdings, it is evident that the producers in the growing regime are, on average, larger in terms of both land operated and owned, which would appear inconsistent with the hypothesized inverse farm size-farm growth association. Second, those households in the growing regimes under each heading also possess relatively greater quantities of titled land. While this is to be expected given the hypothesis put forth above, such a finding may also stem from the fact that the growing farms simply appear larger on average. Third, again under both headings, the stagnant or zero growth producers have a comparatively larger number of household members of working age as well as more dependents, which is perhaps in line with the contentions of \citet{chayanov1966} as one might expect that larger, more mature families have reached an equilibrium farm size. Finally, consistent with the model put forth in \citet{jovanovic1982}, in both cases those producers in the stagnating and decaying regimes are relatively older whereas those in the growing regime are relatively younger on average. Though, for the most part, the descriptive statistics coincide with the hypothesized relationships, a more robust empirical approach is required to formally test the theories in question.
+The LTC-CPES survey is panel in nature and was again administered in the 
+years 1994, 1999, 2002, and 2007. 
+For a variety of reasons, issues of attrition included, households were 
+strategically added to the sample in select years.
+As such, the panel is unbalanced with 300, 284, 293, 223, and 446 reliable 
+observations in the years 1991, 1994, 1999, 2002, and 2007, respectively. 
+Importantly, 139 households were successfully surveyed in each of the five 
+years, 70 were surveyed in four of the years, 41 in three of the years, 65 in two 
+of the years, and the remaining households were only surveyed once. 
+While it is evident that the number of households interviewed in each survey 
+year is relatively small, such shortcomings are partially compensated by the 
+depth of the interviews administered. 
+Particularly relevant at present are the detailed modules on modes of land 
+access, property rights, household characteristics and individual-level 
+demographic traits, as well as production and income. 
+For further information regarding the LTC-CPES survey see 
+\citet{fletschner2002}, \citet{carter2003}, or \citet{schechter2007}.
 
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%        METHODOLOGY     %%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Table \ref{def} provides definitions for all variables utilized in the analysis and Table \ref{desc} presents select descriptive statistics. The variables defined follow directly from the discussion in Section \ref{sec: intro}, though it should be noted that the age variable utilized corresponds to the age of the farm operator, which is used as a simple proxy for the age of the farm. Focusing on Table \ref{desc}, first consider the three columns under the heading ``Land Operated.'' After calculating growth rates of operational landholdings between periods $t$ and $t+1$ for all possible observations, we partition the data into three mutually exclusive groups: those that witnessed (1) positive growth; (2) stagnation or zero growth; and (3) negative growth or decay. Presented are variables means (at time $t$) by these growth regimes. The procedure is then repeated in the columns corresponding to the heading ``Land Owned,'' except now growth rates are calculated on the basis of the quantity of land operated that is owned (see Section \ref{sec: methodology} for elaboration on the justification for this variable). It is important to note that, due to the unbalanced nature of the panel as well as the fact that a multitude of households reported no land owned, the observations utilized to calculate the variable means under each heading pertain to distinct subsamples of the available data. Accordingly, of the 1,533 observations, it is evident that we are able to retrieve growth rates for 811 (636) of the observations on the basis of land operated (land owned).
+%
+%Four interesting characteristics of Table \ref{desc} deserve mention. First, independent of whether growth rates are calculated on the basis of operational or ownership landholdings, it is evident that the producers in the growing regime are, on average, larger in terms of both land operated and owned, which would appear inconsistent with the hypothesized inverse farm size-farm growth association. Second, those households in the growing regimes under each heading also possess relatively greater quantities of titled land. While this is to be expected given the hypothesis put forth above, such a finding may also stem from the fact that the growing farms simply appear larger on average. Third, again under both headings, the stagnant or zero growth producers have a comparatively larger number of household members of working age as well as more dependents, which is perhaps in line with the contentions of \citet{chayanov1966} as one might expect that larger, more mature families have reached an equilibrium farm size. Finally, consistent with the model put forth in \citet{jovanovic1982}, in both cases those producers in the stagnating and decaying regimes are relatively older whereas those in the growing regime are relatively younger on average. Though, for the most part, the descriptive statistics coincide with the hypothesized relationships, a more robust empirical approach is required to formally test the theories in question.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% Methodology %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Methodology}
 \label{sec: methodology}
@@ -549,16 +616,16 @@ Continuing with Table \ref{tests}, hypothesis tests (3)-(7) present estimates of
 
 The above results, overall, suggest that farm growth indeed varies systematically with select observable characteristics (i.e.\ land operated, titled area, and labor), which implies a rejection of Gibrat's Law. Perhaps more interestingly, the signs associated with the statistically significant effects empirically substantiate three of the hypotheses put forth: (1) that the inverse farm size-productivity relationship translates into an analogous inverse farm size-farm growth association; (2) that enhanced tenure security positively impacts farm growth; and (3) that labor force increases positively affect land accumulation. However, with $R^2$ values of 0.13 and 0.03 in the two models, respectively, and the evidently small magnitude of the above-discussed marginal effects, it should be noted that our relatively comprehensive model cannot account for the bulk of the variation in farm growth rates. Therefore, while we do formally reject Gibrat's Law, the notion of stochastic farm growth may, in fact, be viewed as a reasonable first approximation.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%        CONCLUSIONS      %%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% Conclusions %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Conclusions}
 \label{sec: conclusions}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%       REFERENCES      %%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% References %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %Start fresh page
 \newpage
@@ -572,15 +639,15 @@ The above results, overall, suggest that farm growth indeed varies systematicall
 \bibliography{/Users/hendersonhl/Documents/References}
 \newpage
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%         APPENDIX        %%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% Appendix %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpage
 \doublespacing
 \section*{Appendix}
 
-%%%%%%%%%%%%%%%%%% Variable Definitions %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% Variable Definitions  %%%%%%%%%%
 \footnotesize
 \begin{longtable}{l  p{10.5cm}}
 \caption[Variable definitions]{Variable definitions} \\[-2ex] 
@@ -608,42 +675,65 @@ The above results, overall, suggest that farm growth indeed varies systematicall
 \endlastfoot
 
 % Content
-Land Operated & All land owned plus land rented, sharecropped, or borrowed \emph{from} others less land rented, sharecropped, or borrowed \emph{to} others (hectares) \\
+Land Operated & Land owned plus land rented, sharecropped, or borrowed 
+\emph{from} others less land rented, sharecropped, or borrowed \emph{to} 
+others (hectares) \\
 
-Land Owned & Quantity of land operated that is owned (with or without formal title) (hectares)\\
+Titled Area & Quantity of land owned with legally registered, mortgageable 
+property rights (hectares)\\
 
-Titled Area & Quantity of land with legally registered, mortgageable property rights (hectares)\\
+Labor  & Number of household members ages 15 to 64 \\
 
-Labor  & Number of household members between the ages of 15 and 64 \\
+Dependents & Number of household members younger than 15 or older than 
+64 years of age \\ 
 
-Dependents & Number of household members younger than 15 or older than 64 years of age \\ 
+Experience & Age of the household head less years of education of the 
+household head less six years \\ 
 
-Age  & Age of the household head \\ \hline
+Education & Years of education of the household head \\ \hline
+
 \label{def}
 \end{longtable}
 \normalsize
 \newpage
 
-%%%%%%%%%%%%%%%%%%  Descriptive Statistics   %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%% Descriptive Statistics   %%%%%%%%%
 
 \footnotesize
 \ctable[
-cap = {Select descriptive statistics},
-caption = {Select descriptive statistics},
+cap = {Descriptive statistics},
+caption = {Descriptive statistics},
 captionskip = -2ex,
 pos=htb,
 label = {desc}
-]{lrrrrrrrr}{}{\hline \hline
-&& \multicolumn{3}{c}{Land Operated} && \multicolumn{3}{c}{Land Owned} \\ \hline
-Variable && \multicolumn{1}{c}{Growth} & \multicolumn{1}{c}{Stagnation} & \multicolumn{1}{c}{Decay} && \multicolumn{1}{c}{Growth} & \multicolumn{1}{c}{Stagnation} & \multicolumn{1}{c}{Decay} \\ \hline
-Land Operated   &&  34.40 & 28.98 & 33.53 && 44.58 & 29.54 & 38.93 \\[-1ex]
-Land Owned      &&  30.47 & 27.33 & 26.95 &&  38.43 & 28.18 & 36.47 \\[-1ex]
-Titled Area         &&  28.08 & 16.55 & 22.63 && 35.83 & 20.71 & 27.75 \\[-1ex]
-Labor                  &&    2.99 &   3.15 &   2.82 &&   3.03 &   3.27 & 2.95 \\[-1ex]
-Dependents        &&    2.64 &   2.72 &   2.52 &&   2.58 &   2.76 & 2.52  \\[-1ex]
-Age                     &&  51.48 & 53.57 & 54.01 && 53.94 & 54.13 & 56.47 \\[-1ex]
-$N$                     &&     308 &    200  &   303  &&    231 &   198 & 207 \\
-\hline}
+]{lrrrrrrrrrr}{
+\tnote[a]{The variables experience and education have only 291 observations
+for the year 1991.}
+}{\hline \hline
+& \multicolumn{2}{c}{1991} & \multicolumn{2}{c}{1994} & 
+\multicolumn{2}{c}{1999} & \multicolumn{2}{c}{2002} & 
+\multicolumn{2}{c}{2007} \\ \hline
+Variable & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{SD} &
+\multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{SD} &
+\multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{SD} &
+\multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{SD} &
+\multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{SD} \\ \hline
+Land Operated & 32.16 & 72.30 & 38.29 & 86.87 & 34.82 & 83.33 & 38.24 & 
+99.63 & 19.87 & 61.90\\[-1ex]
+Titled Area       & 21.09 & 64.75 & 29.48 & 85.10 & 21.84 & 62.30 & 30.49 & 
+91.93 & 11.05 & 42.71\\[-1ex]
+Labor               &  2.93 &   1.55 &   2.61 &   1.35 &   2.88 &   1.73 &   3.22 &   
+1.64 &  2.88 &   1.54\\[-1ex]
+Dependents     &  2.85 &   2.08  &  2.45 &    2.01 &  2.40 &   1.94  &  2.35 &   
+1.67 &  2.03 &   1.64\\[-1ex]
+Experience      & 39.35 & 15.56 & 41.59 &  15.87 & 43.09 & 14.66 & 45.50 & 
+15.08 & 42.88 & 15.77\\[-1ex]
+Education        &  4.13 &   2.74 &   4.12 &   2.72  &  4.27 &   2.48 &   4.56 &   
+2.65  &  4.73 &  2.86 \\[-1ex]
+$N$       & \multicolumn{2}{c}{300} & \multicolumn{2}{c}{284} & 
+\multicolumn{2}{c}{293} & \multicolumn{2}{c}{223} & 
+\multicolumn{2}{c}{446} \\ \hline
+}
 \normalsize
 
 %%%%%%%%%%%%%%%%%%%% Systems GMM Estimates %%%%%%%%%%%%%%%%%%%%%%
