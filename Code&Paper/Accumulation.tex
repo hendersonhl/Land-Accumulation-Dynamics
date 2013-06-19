@@ -19,7 +19,6 @@
 %       - Highlight importance of time-invariant factors
 %       - Discuss number of instruments issues
 %       - Discuss specific hypotheses
-%       - Fix x-y issue
 %       - Attrition issues
 % (3) Results:
 %       - Re-run results
@@ -610,7 +609,7 @@ the distribution of agricultural landholdings.
 It was further demonstrated that the era was characterized by non-negligible 
 land market activity and potentially interesting accumulation dynamics.
 In light of these observations, this section considers the methodological 
-approach and empirical model associated with our examination of the 
+approach and empirical model associated with our evaluation of the 
 theories discussed in Section \ref{sec: theories}.
 
 While our specific empirical model is discussed in detail below, it is first 
@@ -737,45 +736,113 @@ thus standard errors are generally calculated using the finite-sample correction
 put forth in \citet{windmeijer2005} 
 \citep{arellano1991, bond2002, roodman2009}.
 
-\citet{blundell1998}, building on \citet{arellano1995}, further developed the GMM estimator outlined above. The authors noted that when the series in question has near unit root properties, the utilized instruments are likely to be weak and, thus, subject to non-trivial finite sample bias. In such situations it may be the case that past changes are more predictive of current levels than past levels are of current changes or deviations \citep{roodman2009}. To fix ideas, reconsider the simple autoregressive case (i.e.\ $\beta_2$=0). Under the assumption that changes in the instrumenting variables are uncorrelated with the fixed effects, \citeauthor{blundell1998} suggested utilizing the additional $T-2$ linear moment conditions $E[\Delta x_{1,i,t-1} (\alpha_i + u_{i,t})]$ for $i=1,2,\ldots,N$ and $t=3,4,\ldots,T$ where $\Delta x_{1,i,t-1} = x_{1,i,t-1} - x_{1,i,t-2}$. In exploiting the new moment conditions, the authors developed a ``system'' GMM estimator whereby the $T-2$ equations in orthogonal deviations (or first-differences) and the $T-2$ equations in levels are stacked and the instrument matrix is augmented as follows:
+\citet{blundell1998}, building on \citet{arellano1995}, noted that when the 
+series in question has near unit root properties, the utilized instruments are 
+likely to be weak.
+In such situations it may be the case that past changes are more predictive of 
+current levels than past levels are of current changes or deviations 
+\citep{roodman2009}. 
+To fix ideas, reconsider the simple autoregressive case (i.e.\ $\beta_2$=0). 
+\citeauthor{blundell1998} suggested utilizing the additional $T-2$ linear 
+moment conditions $E[\Delta y_{i,t-1} (\alpha_i + u_{i,t})]$ for 
+$i=1,2,\ldots,N$ and $t=3,4,\ldots,T$ where $\Delta y_{i,t-1} = y_{i,t-1} - 
+y_{i,t-2}$.%
+\footnote{It is assumed here that changes in the instrumenting variables are 
+uncorrelated with the fixed effects.}
+In exploiting the new moment conditions, the authors developed a ``system'' 
+GMM estimator whereby the $T-2$ equations in orthogonal deviations 
+(or first-differences) and the $T-2$ equations in levels are stacked and the 
+instrument matrix is augmented as follows:
 \begin{equation}
 Z_{i}^{+} = \left[ 
 \begin{array}{ccccccc}
 Z_i  & 0 & 0 & \ldots & 0\\
-0 & \Delta x_{1,i,2} & 0 & \ldots & 0 \\
-0 & 0 & \Delta x_{1,i,3} & \ldots & 0 \\
+0 & \Delta y_{i,2} & 0 & \ldots & 0 \\
+0 & 0 & \Delta y_{i,3} & \ldots & 0 \\
 . & . & . & \ldots & 0 \\
-0 & 0 & 0 & \ldots & \Delta x_{1,i,T-1}
+0 & 0 & 0 & \ldots & \Delta y_{i,T-1}
 \end{array}
 \right].
 \label{znew}
 \end{equation}
 
 \noindent
-Estimation then consists of minimizing $J_N$ after properly introducing the additional moment conditions. Further, analogous to the case of the \citeauthor{arellano1991} GMM estimator, $Z_{i}^{+}$ readily incorporates additional instruments associated with the autoregressive-distributed lag model.
+Estimation then consists of minimizing $J_N$ after properly introducing the 
+additional moment conditions. 
+Further, analogous to the case of the \citeauthor{arellano1991} GMM 
+estimator, $Z_{i}^{+}$ readily incorporates additional instruments 
+associated with the autoregressive-distributed lag model.
 
-Turning to the empirical model, then, in line with the above discussion and the empirical literature on Gibrat's Law \citep{evans1987, sleuwaegen2002, rizov2003, dries2004b}, the following basic specification is put forth:
+Turning to the empirical model, in line with the above discussion as well as 
+the firm growth literature
+\citep{evans1987, sleuwaegen2002, rizov2003, dries2004b}, the following 
+basic specification is put forth:
 \begin{equation}
-[\ln(x_{1,i,t}) - \ln(x_{1,i,t-1})]/\delta_t = \ln [g(x_{1,i,t-1}, x_{2,i,t-1}, x_{3,i,t-1}, x_{4,i,t-1}, x_{5,i,t-1})] + u_{i,t}
+\frac{\ln (y_{i,t}) - \ln(y_{i,t-1})}{\delta_t} \times 100 = \ln \big[g(y_{i,t-1}, 
+x_{i,t-1})\big] + \alpha_i + u_{i,t}
+\label{emodel}
 \end{equation}
 
 \noindent
-where for producer $i=1,2,\ldots,N$ at time $t=1,2,\ldots,T$ the variables land operated, titled area, labor, dependents, and age are denoted by $x_{1}$, $x_{2}$, $x_{3}$, $x_{4}$, and $x_{5}$, respectively, $\delta_t$ is the number of years between the survey periods $t$ and $t-1$, and $u$ is the error term.\footnote{See Table \ref{def} for variable definitions.} Approximating the growth function $g(\cdot)$ by a second-order expansion in the logs and augmenting the basic model with producer-specific fixed effects as well as time dummies, results in the following expression:
-\begin{align}
-[\ln(x_{1,i,t}) - \ln(x_{1,i,t-1})]/\delta_t & = \alpha_i + \sum_{t=1}^{3}\theta_t d_t +\sum_{k=1}^{5}\beta_k \ln (x_{k,i,t-1})\nonumber\\
-& +\frac{1}{2}\sum_{k=1}^{5}\sum_{l=1}^{5}\beta_{kl}\ln (x_{k,i,t-1})\ln (x_{l,i,t-1})
-+\sum_{k=2}^{4}\tau_k d_{k,i,t-1}+u_{i,t}
-\label{emodel}
-\end{align}
+where, for producer $i=1,2,\ldots,N$ at time $t=1,2,\ldots,T$, $y_{i,t}$
+represents land operated and $\delta_t$ is the number of years between 
+survey periods $t$ and $t-1$. The left-hand side is thus the annual 
+percentage growth rate in land operated. Regarding the right-hand side,
+$x_{i,t-1} = (x_{1,i,t-1}, \ldots, x_{5,i,t-1} )$ is a vector of lagged values 
+of explanatory variables including titled area, labor, dependents, experience, 
+and education, respectively,%
+\footnote{See Table \ref{def} for variable definitions.} 
+$\alpha_i$ is the producer-specific effect, and $u_{i,t}$ is the error term. 
+Approximating the growth function $g(\cdot)$ by a second-order expansion 
+in the logs and augmenting the basic model with time dummies results in the 
+empirical model to be estimated.%
+\footnote{In situations where scaling is necessary to permit logarithmic 
+transformation of zero-valued explanatory variables, we employ the dummy
+variable procedure outlined in \citet{battese1997}, as alternative approaches 
+(e.g.\ adding an arbitrarily small constant) can bias parameter estimates.
+The method is simple: recode all zero values of explanatory variables to one 
+and include in the regression a corresponding dummy variable that takes on 
+the value of one if that observation was recoded and zero otherwise. 
+Note that dummy variables for land operated and experience are not 
+necessary as these variables never take on a value of zero.}
 
-\noindent
-where $\alpha$ denotes the producer-specific constant, $d_t$ represents the time dummies, $d_k$ is a dummy variable that equals one when $x_k$ takes a value of zero,\footnote{In situations where scaling is necessary to permit logarithmic transformation of zero-valued explanatory variables, \citet{battese1997} illustrated that the dummy variable method utilized here is preferable to a number of alternative approaches (e.g.\ adding an arbitrarily small constant), which can bias parameter estimates. The method is simple: recode all zero values of explanatory variables to one and include in the regression a corresponding dummy variable that takes on the value of one if that observation was recoded and zero otherwise. Note that dummy variables for land operated and age are not necessary as these variables never take on a value of zero.} and $\theta$, $\beta$, and $\tau$ are parameters to be estimated. Before moving forward, it should be noted that farm growth could alternatively be defined on the basis of other indicators such as output value, net income, livestock number, etc. However, given the stated salience of issues of land access, we confine our attention to growth in operational landholdings. Accordingly, as growth in operational landholdings can occur through a variety of channels (e.g.\ accumulation of owned land, rental arrangements, sharecropping, etc.), we attempt to explore the accumulation channels by also estimating Eq.\ (\ref{emodel}) when defining the dependent variable on the basis of operational landholdings that are owned.\footnote{An attempt was made to estimate Eq.\ (\ref{emodel}) when defining growth on the basis of unowned landholdings, but the number of available observations rendered this model infeasible.}
+% To do:
+% (1) Error term assumptions
+% (2) Discuss individual hypotheses
+% (3) Number of instruments
+% (4) Attrition probits
 
-It is evident that Eq.\ (\ref{emodel}) is simply a special case of the autoregressive-distributed lag model previously discussed. As such, utilizing orthogonal deviations to minimize data loss due to the unbalanced nature of the panel, we employ the \citet{arellano1995}/\citet{blundell1998} ``system'' GMM estimator outlined above where, with the exception of age and the time dummies which are deemed exogenous, all explanatory variables are treated as predetermined. The appropriateness of the specification rests primarily on the validity of three assumptions: (1) the lack of serial correlation in the disturbances; (2) instrumental exogeneity; and (3) the absence of selection bias. The first and second of these assumptions are readily examined via the construction of suitable hypothesis tests. As such, we explore (1) the serial independence assumption with the \citet{arellano1991} test for first-order serial correlation in the disturbances and (2) the instrumental exogeneity assumption with the \citet{hansen1982} $J$ test for overidentifying restrictions. Regarding issues of selection, ``growth rates can only be measured for surviving farms (i.e.\ those still operating in period $t$), and since slow growing farms are most like to exit the industry, it is easy to see that small, fast growing farms can easily be overrepresented in the sample, thus introducing potential bias in the results'' \citep[pg.\ 790]{bakucs2009}. While there is a clear theoretical justification for the presence of selection effects, the vast majority of the empirical literature to date suggests that the resulting bias is negligible \citep{evans1987, hall1987, weiss1999, dries2004}. Therefore, we avoid undue complication of the estimation procedure and focus on Gibrat's Law as it applies to surviving farms.
+It is evident that Eq.\ (\ref{emodel}) is simply a special case of the 
+autoregressive-distributed lag model previously discussed. 
+As such, utilizing orthogonal deviations to minimize data loss due to the 
+unbalanced nature of the panel, we employ the 
+\citet{arellano1995}/\citet{blundell1998} ``system'' GMM estimator outlined 
+above where, with the exception of experience and the time dummies 
+which are deemed exogenous, all explanatory variables are treated as 
+predetermined. 
+The appropriateness of the specification rests primarily on the validity of 
+three assumptions: (1) the lack of serial correlation in the disturbances; 
+(2) instrumental exogeneity; and (3) the absence of selection bias. 
+The first and second of these assumptions are readily examined via the 
+construction of suitable hypothesis tests. 
+Accordingly, we explore (1) the serial independence assumption with the 
+\citet{arellano1991} test for first-order serial correlation in the disturbances 
+and (2) the instrumental exogeneity assumption with the \citet{hansen1982} 
+$J$ test for overidentifying restrictions. 
+Regarding issues of selection, ``growth rates can only be measured for 
+surviving farms (i.e.\ those still operating in period $t$), and since slow 
+growing farms are most like to exit the industry, it is easy to see that small, 
+fast growing farms can easily be overrepresented in the sample, thus 
+introducing potential bias in the results'' \citep[pg.\ 790]{bakucs2009}. 
+While there is a clear theoretical justification for the presence of selection 
+effects, the vast majority of the empirical literature to date suggests that the 
+resulting bias is negligible \citep{evans1987, hall1987, weiss1999, dries2004}. 
+Therefore, we avoid undue complication of the estimation procedure and 
+focus on surviving farms.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%        RESULTS      %%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% Results %%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Results}
 \label{sec: results}
