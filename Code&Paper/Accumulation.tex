@@ -13,16 +13,9 @@
 
 % To do:
 % (1) Write abstract
-% (2) Methodology section:
-%	- Clarify how instruments enter moments (especially those strictly 
-%          exogenous) (redundancy as well)
-%       - Highlight importance of time-invariant factors
-%       - Discuss number of instruments issues
-%       - Discuss specific hypotheses
-%       - Attrition issues
-% (3) Results:
-%       - Re-run results
-%	- Generate select graphs
+% (2) Results:
+%	- Confidence intervals
+%	- Generate graphs
 % (4) Write conclusions
 
 % Notes:
@@ -224,8 +217,8 @@ models in an effort to simultaneously test the leading theories of land
 accumulation dynamics.
 The results of the analysis suggest that farm growth indeed varies 
 systematically with select observable characteristics 
-(i.e.\ land operated, titled area, and family labor force), which implies a formal 
-rejection of Gibrat's Law. 
+(i.e.\ land operated and titled area), which implies a formal rejection of 
+Gibrat's Law. 
 However, our relatively comprehensive model cannot account for the bulk of 
 the variation in farm growth rates, which suggests that the notion of 
 stochastic farm growth may be viewed as a reasonable first approximation.
@@ -629,27 +622,12 @@ uncorrelated and independent across producers.
 Finally, $\beta_1$ and $\beta_2$ represent parameters to be estimated
 \citep{bond2002}.
 
-It is evident that estimation of Eq.\ (\ref{adl}) via OLS is inconsistent as, 
-above all, there exists a correlation between the explanatory variable 
-$y_{i,t-1}$ and the error term $\alpha_i + u_{i,t}$, which does not vanish 
-as $N$ gets larger. 
-The within-groups estimator can also be shown to be inconsistent as the 
-requisite transformation introduces a correlation between the transformed 
-$y_{i,t-1}$ and the transformed error term. 
-To see this, note that the transformed $y_{i,t-1}$ is $y_{i,t-1} - 
-\frac{1}{T-1} (y_{i,1} + \ldots + y_{i,t} + \ldots + y_{i,T-1})$ 
-whereas the transformed error term is $u_{i,t} - \frac{1}{T-1} (u_{i,2} + 
-\ldots + u_{i,t-1} + \ldots + u_{i,T})$. 
-It is thus apparent that the component $\frac{-y_{i,t}}{T-1}$ in the 
-$y_{i,t-1}$ transformation expression is correlated with the error term, 
-and $\frac{-u_{i,t-1}}{T-1}$ in the disturbance transformation expression 
-is correlated with $y_{i,t-1}$. 
-Such a correlation does not dissipate as $N$ gets larger. 
-
+Estimation of Eq.\ (\ref{adl}) via the within-groups estimator is 
+inconsistent as the requisite transformation introduces a correlation between 
+the transformed $y_{i,t-1}$ and the transformed error term. 
 First-difference and orthogonal deviations transformations can also eliminate 
 the individual effects $\alpha_i$, but in both cases the correlation between the 
-transformed $y_{i,t-1}$ and transformed error term persists, which again 
-suggests that OLS estimation will yield inconsistent estimates.%
+transformed $y_{i,t-1}$ and transformed error term persists.%
 \footnote{In contrast to the first-difference transformation in which a lagged 
 observation is subtracted from the contemporaneous observation, the 
 orthogonal deviations transformation subtracts the average of all future 
@@ -686,18 +664,38 @@ instrument matrix can be written as follows:
 \begin{equation}
 Z_i = \left[ 
 \begin{array}{ccccccc}
-y_{i,1} & 0 & 0  & \ldots  & 0 & \ldots & 0 \\\
-0 & y_{i,1} & y_{i,2}  & \ldots  & 0 & \ldots & 0 \\\
-. & . & .  & \ldots  & . & \ldots & . \\\
-0 & 0 & 0  & \ldots  & y_{i,1} & \ldots & y_{i,T-2}
+y_{i,1} & 0 & 0 & 0 & 0 & 0 & \cdots   \\\
+0 & y_{i,1} & y_{i,2} & 0 & 0 & 0 & \cdots   \\\
+0 & 0 & 0 & y_{i,1} & y_{i,2} & y_{i,3} & \cdots  \\\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots
 \end{array}
 \right]
 \label{z}
 \end{equation}
 
 \noindent
+or ``collapsed'' as 
+\begin{equation}
+\left[ 
+\begin{array}{ccccccc}
+y_{i,1} & 0 & 0 & \cdots   \\\
+y_{i,1} & y_{i,2} & 0 & \cdots   \\\
+y_{i,1} & y_{i,2} & y_{i,3} & \cdots  \\\
+\vdots & \vdots & \vdots & \ddots
+\end{array}
+\right]
+\label{zc}
+\end{equation}
+
+\noindent
 where, for the $i^{th}$ entity, the rows correspond to the transformed 
-equation for periods $t=3,4,\ldots,T$. 
+equation for periods $t=3,4,\ldots,T$.%
+\footnote{The primary rationale for collapsing the instrument matrix is to
+reduce the instrument count.  
+The class of models considered here tend to generate instruments 
+prolifically, which can overfit endogenous variables and weaken select
+specification tests.
+See \citet{roodman2009b} for more information.}
 The above is readily generalized to the case of the autoregressive-distributed 
 lag model under consideration. 
 While the availability of further instruments will depend on the assumptions 
@@ -756,14 +754,29 @@ instrument matrix is augmented as follows:
 \begin{equation}
 Z_{i}^{+} = \left[ 
 \begin{array}{ccccccc}
-Z_i  & 0 & 0 & \ldots & 0\\
-0 & \Delta y_{i,2} & 0 & \ldots & 0 \\
-0 & 0 & \Delta y_{i,3} & \ldots & 0 \\
-. & . & . & \ldots & 0 \\
-0 & 0 & 0 & \ldots & \Delta y_{i,T-1}
+Z_i  & 0 & 0 & 0 & \ldots \\
+0 & \Delta y_{i,2} & 0 & 0 & \ldots \\
+0 & 0 & \Delta y_{i,3} & 0 & \ldots  \\
+0 & 0 & 0 & \Delta y_{i,4} & \ldots  \\
+\vdots & \vdots & \vdots & \vdots & \ddots
+\end{array}
+\right]
+\label{znew}
+\end{equation}
+
+\noindent
+or ``collapsed'' as
+\begin{equation}
+\left[ 
+\begin{array}{ccccccc}
+Z_i  & 0  \\
+0 & \Delta y_{i,2}  \\
+0 & \Delta y_{i,3}  \\
+0 & \Delta y_{i,4}  \\
+\vdots & \vdots 
 \end{array}
 \right].
-\label{znew}
+\label{zcnew}
 \end{equation}
 
 \noindent
@@ -778,67 +791,99 @@ the firm growth literature
 \citep{evans1987, sleuwaegen2002, rizov2003, dries2004b}, the following 
 basic specification is put forth:
 \begin{equation}
-\frac{\ln (y_{i,t}) - \ln(y_{i,t-1})}{\delta_t} \times 100 = \ln \big[g(y_{i,t-1}, 
-x_{i,t-1})\big] + \alpha_i + u_{i,t}
+\frac{\ln (y_{i,t}) - \ln(y_{i,t-1})}{\delta_t} \times 100 = \ln 
+\big[g(y_{i,t-1}, x_{i,t-1})\big] + \alpha_i + u_{i,t}
 \label{emodel}
 \end{equation}
 
 \noindent
 where, for producer $i=1,2,\ldots,N$ at time $t=1,2,\ldots,T$, $y_{i,t}$
 represents land operated and $\delta_t$ is the number of years between 
-survey periods $t$ and $t-1$. The left-hand side is thus the annual 
-percentage growth rate in land operated. Regarding the right-hand side,
-$x_{i,t-1} = (x_{1,i,t-1}, \ldots, x_{5,i,t-1} )$ is a vector of lagged values 
-of explanatory variables including titled area, labor, dependents, experience, 
-and education, respectively,%
+survey periods $t$ and $t-1$. 
+The left-hand side is thus an approximation of the annual percentage growth 
+rate in land operated. 
+Regarding the right-hand side, $x_{i,t-1} = (x_{1,i,t-1}, \ldots, x_{5,i,t-1} )$ 
+is a vector of lagged values of explanatory variables including titled area, 
+labor, dependents, experience, and education, respectively,%
 \footnote{See Table \ref{def} for variable definitions.} 
 $\alpha_i$ is the producer-specific effect, and $u_{i,t}$ is the error term. 
 Approximating the growth function $g(\cdot)$ by a second-order expansion 
 in the logs and augmenting the basic model with time dummies results in the 
 empirical model to be estimated.%
-\footnote{In situations where scaling is necessary to permit logarithmic 
-transformation of zero-valued explanatory variables, we employ the dummy
-variable procedure outlined in \citet{battese1997}, as alternative approaches 
-(e.g.\ adding an arbitrarily small constant) can bias parameter estimates.
+\footnote{\label{note: zvdum}In situations where scaling is necessary to 
+permit logarithmic transformation of zero-valued explanatory variables, 
+we employ the dummy variable procedure outlined in \citet{battese1997}, 
+as alternative approaches (e.g.\ adding an arbitrarily small constant) can bias 
+parameter estimates.
 The method is simple: recode all zero values of explanatory variables to one 
 and include in the regression a corresponding dummy variable that takes on 
 the value of one if that observation was recoded and zero otherwise. 
 Note that dummy variables for land operated and experience are not 
 necessary as these variables never take on a value of zero.}
 
-% To do:
-% (1) Error term assumptions
-% (2) Discuss individual hypotheses
-% (3) Number of instruments
-% (4) Attrition probits
+Eq.\ (\ref{emodel}) nests tests of all hypotheses discussed in Section 
+\ref{sec: theories}. 
+First, joint independence of initial producer characteristics from 
+subsequent land accumulation would provide support for Gibrat's Law.
+Second, appropriate signs and joint statistical significance of the coefficients 
+capturing the (non-linear) effect of land operated on land accumulation 
+would substantiate the hypothesis put forth by \citet{carter1993}.
+Third, a positive and statistically significant coefficient on titled area would 
+corroborate the contention of \citet{carter1998b} that tenure security 
+incentivizes land accumulation.
+Fourth, a positive and statistically significant coefficient on labor 
+(dependents) would lend support to the life cycle hypothesis that land 
+accumulation is induced via shifting downward (upward) the marginal 
+drudgery of labor (marginal utility of income) curve.
+Fifth, a negative and statistically significant coefficient on experience 
+would substantiate the hypothesis of \citet{jovanovic1982} that younger 
+farms grow faster. 
+Finally, as \citet{rodgers1994} suggested that both agricultural-specific and
+general human capital are influenced by formal education, the effect of 
+education on land accumulation is \emph{a priori} ambiguous.%
+\footnote{Data limitations preclude distinguishing between 
+agricultural-specific and general human capital.}
 
 It is evident that Eq.\ (\ref{emodel}) is simply a special case of the 
 autoregressive-distributed lag model previously discussed. 
 As such, utilizing orthogonal deviations to minimize data loss due to the 
 unbalanced nature of the panel, we employ the 
-\citet{arellano1995}/\citet{blundell1998} ``system'' GMM estimator outlined 
-above where, with the exception of experience and the time dummies 
-which are deemed exogenous, all explanatory variables are treated as 
-predetermined. 
+\citet{arellano1995}/\citet{blundell1998} ``system'' GMM estimator 
+outlined above. 
+With the exception of the time dummies which are deemed exogenous, all 
+explanatory variables are treated as predetermined. 
 The appropriateness of the specification rests primarily on the validity of 
-three assumptions: (1) the lack of serial correlation in the disturbances; 
-(2) instrumental exogeneity; and (3) the absence of selection bias. 
-The first and second of these assumptions are readily examined via the 
-construction of suitable hypothesis tests. 
-Accordingly, we explore (1) the serial independence assumption with the 
-\citet{arellano1991} test for first-order serial correlation in the disturbances 
-and (2) the instrumental exogeneity assumption with the \citet{hansen1982} 
-$J$ test for overidentifying restrictions. 
-Regarding issues of selection, ``growth rates can only be measured for 
+four assumptions: (1) the disturbances lack serial correlation; (2) the 
+instruments are exogenous; (3) the instrument count is sufficiently small; 
+and (4) attrition bias is absent or minimal. 
+The first three of these assumptions are examined post-estimation.
+We explore the serial independence assumption with the \citet{arellano1991} 
+test for first-order serial correlation in the disturbances and the instrumental 
+exogeneity assumption with \citet{hansen1982} tests for overidentifying 
+restrictions. 
+Further, as too many instruments can bias parameter estimates and weaken 
+the Hansen test \citep{roodman2009b}, we monitor the instrument count 
+throughout and examine the sensitivity of the results to reductions.
+
+Regarding issues of attrition, ``growth rates can only be measured for 
 surviving farms (i.e.\ those still operating in period $t$), and since slow 
 growing farms are most like to exit the industry, it is easy to see that small, 
 fast growing farms can easily be overrepresented in the sample, thus 
 introducing potential bias in the results'' \citep[pg.\ 790]{bakucs2009}. 
-While there is a clear theoretical justification for the presence of selection 
-effects, the vast majority of the empirical literature to date suggests that the 
-resulting bias is negligible \citep{evans1987, hall1987, weiss1999, dries2004}. 
-Therefore, we avoid undue complication of the estimation procedure and 
-focus on surviving farms.
+While the vast majority of the empirical literature to date suggests that the 
+resulting bias is negligible \citep{evans1987, hall1987, weiss1999, dries2004},
+to gain further insight into this problem we conducted two types of tests for
+attrition bias: (1) the \citet{becketti1988} attrition test and (2) the 
+\citet{fitzgerald1998} attrition probit.
+As it is the primary variable of interest, each test was conducted with three 
+alternative specifications of land operated (i.e.\ in levels, logarithms, and 
+growth rates), yielding a total of six tests.
+In only one such test do we reject the null hypothesis of no attrition bias at 
+the 5 percent level, thereby suggesting that the issue of attrition is likely 
+minimal.% 
+\footnote{The results of the tests are available upon request.}
+Accordingly, we avoid undue complication of the estimation procedure 
+and focus on surviving farms.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%% Results %%%%%%%%%%%%%%
@@ -847,13 +892,154 @@ focus on surviving farms.
 \section{Results}
 \label{sec: results}
 
-Tables \ref{sysgmm} and \ref{tests} present the results from the \citet{arellano1995}/\citet{blundell1998} ``system'' GMM estimator. To reiterate, from Table \ref{sysgmm} it is evident that we estimate two primary models: (1) where growth is defined on the basis operational landholdings (land operated) and (2) where growth is defined on the basis of the quantity of operational landholdings that are reported to be owned (land owned). The regressors, however, remain identical across the two models. Note also that the number of instruments utilized, the associated $R^2$ values, and the number of observations are provided for each regression at the bottom of the corresponding column. To get an understanding of the parameter estimates as well as the validity of the underlying assumptions, however, it is beneficial to focus on Table \ref{tests}, in which we present a series of related hypothesis tests.
+Tables \ref{sysgmm} and \ref{tests} present the results from the 
+\citet{arellano1995}/\citet{blundell1998} ``system'' GMM estimator. 
+Given that instrument proliferation is a primary concern, we estimate 
+three alternative models in order to examine the sensitivity of the results 
+to reductions in the instrument count: (1) FM, which is the full model using 
+the instrument set defined in Eq.\ (\ref{znew}); (2) CM, which is the 
+collapsed model using the instrument set defined in Eq.\ (\ref{zcnew}); 
+and CR, which is the collapsed model where the instrument set is further 
+restricted to only two-period lags.
+Each model is estimated with a full set of time and ``zero value'' dummies 
+(see footnote \ref{note: zvdum}).
+Note also that the number of instruments utilized, the associated $R^2$ values, 
+and the number of observations are provided for each regression at the 
+bottom of the corresponding column. 
 
-Hypothesis test (1) in Table \ref{tests} presents the results from the \citet{arellano1991} tests for first-order serial correlation in the disturbances. With test statistics of 1.04 and -0.16 for the land operated and land owned regressions, respectively, it is evident that we fail to reject the null hypothesis of no serial correlation for both models. Hypothesis test (2) presents the results for the \citet{hansen1982} $J$ test for overidentifying restrictions, which is distributed $\chi^2$ with degrees of freedom equal to the degree of overidentification and also robust to non-sphericity in the errors. With test statistics of 151.05 and 151.10 for the two models, respectively, we fail to reject the null hypothesis that the instruments are exogenous. Thus, taken together, the Arellano-Bond and Hansen tests suggests that the underlying assumptions of serial independence and instrumental exogeneity are seemingly unproblematic.
+ Looking at Table \ref{sysgmm}, as testament to the consistency of the
+ of the ``system'' GMM estimator, we can exploit the fact that OLS and 
+ within-groups estimates of the coefficient on the (natural log of the) lagged 
+ land operated variable ($y$) are biased in opposite directions. 
+ That is, the OLS estimator is biased upward and the within-groups estimator
+ is biased downward \citep{bond2002}.
+ OLS estimation of the model yields a coefficient on the lagged land operated 
+ variable of $-51.42$ and within-groups yields a coefficient of $-64.70$.%
+ \footnote{Full OLS and within-groups results are available upon request.}
+ It is evident that in each of our three models the coefficient on the lagged
+ land operated variable falls within this range, which suggests that the 
+ ``system'' GMM estimates indeed represent an overall improvement.
+ Given reasonable estimates, then, we can proceed to an in-depth 
+ examination of the validity of the underlying assumptions as well as probe
+ the implications of our estimates for the hypotheses in question.
+ To this end, it is beneficial to focus on Table \ref{tests} in which we 
+ present a series of related hypothesis tests.
+ 
+Hypothesis tests (1)-(3) in Table \ref{tests} present the results from the 
+specification tests discussed in the previous section. 
+Hypothesis test (1) displays z-scores from the \citet{arellano1991} test 
+for first-order serial correlation in the disturbances.
+Hypothesis test (2) displays test statistics from the \citet{hansen1982} 
+test for overidentifying restrictions.
+Hypothesis test (3) presents a difference-in-Hansen test statistic, which 
+tests the validity of the instrument subset associated with the levels model
+(i.e.\ the differenced instruments introduced in Eq.\ [\ref{znew}]) .
+Looking at the FM column, it is evident that we fail to reject the null 
+hypothesis of no serial correlation for hypothesis test (1), and instrumental
+exogeneity for hypothesis tests (2) and (3).
+At first glance the specification thus appears appropriate.
+However, as mentioned, instrument proliferation can greatly weaken the 
+Hansen tests, and both Hansen tests here are associated with an extreme 
+$p$-value of $1.00$, which suggests that the instrument count is excessively 
+high. 
+Proceeding with caution, then, we turn to hypothesis tests (4)-(9) where we 
+present estimates of the marginal effect of (the natural log of) each regressor, 
+which are evaluated at the sample means.
 
-Continuing with Table \ref{tests}, hypothesis tests (3)-(7) present estimates of the marginal effect of (the natural log of) each regressor, which are evaluated at the sample means. It is evident the marginal effects on depend ($x_4$) as well as age ($x_5$) witness no statistical significance, which suggests that farm growth is seemingly independent of these covariates. Of those marginal effects that witness statistical significance (i.e.\ $x_1$, $x_2$, and $x_3$ or land operated, titled area, and labor, respectively), it appears that all signs are in accordance with the theoretical notions discussed in Section \ref{sec: intro}. With respect to $x_1$ in the land operated regression, the associated marginal effect indicates that a one percent increase in the quantity of land operated is expected to induce a statistically significant $0.0013$ (i.e.\ 0.13/100) decrease in the growth rate of operational landholdings, which is in line with the hypothesized inverse farm size-farm growth relationship and a formal rejection of Gibrat's law. Further, it can be seen that such farm growth proceeds at least partially through the accumulation of ownership landholdings, as is evident from the statistically significant marginal effect on $x_1$ in the land owned regression. Regarding $x_2$, we see that a one percent increase in titled area is expected to generate a 0.0012 increase in the growth rate of operational landholdings, an effect that, once again, is accompanied by a statistically significant increase in the growth rate of land owned. Accordingly, these results are consistent with the hypothesis that enhanced tenure security positively impacts farm growth. Finally, turning to $x_3$, it appears that a one percent increase in the family labor force is accompanied by a 0.0008 increase in the growth rate of operational landholdings. However, as opposed to the previous cases, it is evident that the marginal effect is statistically insignificant in the land owned regression. Therefore, while there is evidence that demographic changes impact farm growth, we find that the associated growth tends to occur in channels outside the accumulation of ownership landholdings (e.g.\ rental arrangements, sharecropping, etc.).
+It is evident that the marginal effects on dependents ($x_3$), experience 
+($x_4$), and education ($x_5$) witness no statistical significance, which 
+suggests that land accumulation seemingly operates independently of these 
+covariates.
+Of those marginal effects that witness statistical significance (i.e.\ $y$, $x_1$, 
+and $x_2$ or land operated, titled area, and labor, respectively), it appears that 
+all signs are in broad accordance with the theoretical notions discussed in 
+Section \ref{sec: theories}.
+With respect to land operated, the associated marginal effect indicates that, at
+the mean, a one percent increase in the quantity of land operated is expected to 
+induce a statistically significant $0.15$ (i.e.\ 14.86/100) unit decrease in the 
+annual percentage growth rate of operational landholdings. 
+This finding implies a formal rejection of Gibrat's Law and is consistent with 
+the contention of \citet{carter1993} that smaller farms witness relatively 
+high land reservation prices.
+Further, it is evident that the positive marginal effects associated with titled 
+area and labor, which can be interpreted analogously, corroborate the 
+associated theories: an increase in land titled and household labor tend to 
+induce land accumulation.%
+\footnote{The non-linear effects associated with these theories is further 
+explored below. 
+It is, however, worth mentioning that we attempted to include higher-order
+polynomials in the model, but their insignificance gave way to the more 
+parsimonious specification presented.}
 
-The above results, overall, suggest that farm growth indeed varies systematically with select observable characteristics (i.e.\ land operated, titled area, and labor), which implies a rejection of Gibrat's Law. Perhaps more interestingly, the signs associated with the statistically significant effects empirically substantiate three of the hypotheses put forth: (1) that the inverse farm size-productivity relationship translates into an analogous inverse farm size-farm growth association; (2) that enhanced tenure security positively impacts farm growth; and (3) that labor force increases positively affect land accumulation. However, with $R^2$ values of 0.13 and 0.03 in the two models, respectively, and the evidently small magnitude of the above-discussed marginal effects, it should be noted that our relatively comprehensive model cannot account for the bulk of the variation in farm growth rates. Therefore, while we do formally reject Gibrat's Law, the notion of stochastic farm growth may, in fact, be viewed as a reasonable first approximation.
+Due to the relatively high instrument count in the FM model (275), these
+estimates are potentially suspect.
+As such, the CM regression utilizes the collapsed instrument set, which
+serves to reduce the instrument count to 128.
+Looking to the CM column of Table \ref{tests}, we see that we again fail
+to reject the null hypotheses for tests (1)-(3).
+With $p$-values of 0.63 and 0.28 for Hansen tests (2) and (3), respectively, 
+it is possible to proceed with less concern regarding issues of instrument 
+proliferation.
+Regarding hypothesis tests (4)-(9) in the CM column, then, it is evident that
+the marginal effects associated with $x_3$, $x_4$, and $x_5$ remain 
+insignificant.
+Further, while the marginal effect on titled area ($x_1$) remains positive
+and statistically significant, the marginal effects associated with land operated
+($y$) and labor ($x_2$) are now statistically insignificant.
+Further yet, we see that the magnitude of the marginal effect on titled area
+reduced to 10.62 from 14.83 in the FM regression.
+It is thus apparent that the results are moderately sensitive to the instrument
+count.
+As such, it is beneficial to consider reducing the number of instruments further.
+
+The CR regression, as mentioned, utilizes the collapsed instrument set and 
+additionally restricts lags to two periods.
+This serves to further reduce the instrument count to 97.
+Once again, in no case do we reject the null hypothesis for tests (1)-(3) in the 
+CR column in Table \ref{tests}. 
+Furthermore, with $p$-values of 0.64 and 0.73 for Hansen tests (2) and (3), 
+respectively, it appears possible to take yet greater comfort in the instrument 
+set employed.
+With respect to the hypothesis tests on the marginal effects, then, we see that 
+the effects associated with $x_2$ through $x_5$ remain statistically 
+insignificant.  
+Moreover, the marginal effect associated with titled area ($x_1$) remains 
+statistically significant and of a similar magnitude to the CM regression.
+The primary difference between the CM and CR regressions is that the 
+marginal effect on land operated ($y$) is now statistically significant, 
+though the magnitude of the effect is similar.
+Given that the CR regression is our preferred specification and that both 
+land operated and titled area witness statistical significance, it is beneficial
+to further examine the economic implications of the associated 
+coefficients.
+
+Figure \ref{fig: pgrowth} depicts the relationship between the annual 
+percentage growth rate in operational landholdings and initial land 
+operated.
+The figure was constructed by retrieving the predicted values from the 
+CR regression model and then regressing those predicted values on 
+initial land operated using a fractional polynomial regression 
+\citep{royston1994}.
+Interestingly, the figure implies three distinct growth regimes.
+Those farms operating less than approximately 5.5 hectares appear to tend
+to witness positive growth rates until reaching an equilibrium size of 5.5 
+hectares.
+Those farms operating between approximately 5.5 and 350 hectares appear
+to tend to witness negative growth rates until arriving at that same 
+equilibrium of 5.5 hectares.
+Finally, those farms operating greater than approximately 350 hectares 
+appear to tend to persistently grow.%
+\footnote{While the estimates indeed imply continual growth among the 
+latter regime, the number of observations in this regime is relatively few and 
+more information may reveal a new equilibrium at the high end of the farm 
+size spectrum.}
+Most importantly, however, the figure conforms surprisingly well to the 
+predictions of the model put forth by \citet{carter1993}, as the authors
+contended that a dualistic agrarian structure is the likely product of the 
+unfettered operation of the land market.
+ 
+
+%The above results, overall, suggest that farm growth indeed varies systematically with select observable characteristics (i.e.\ land operated, titled area, and labor), which implies a rejection of Gibrat's Law. Perhaps more interestingly, the signs associated with the statistically significant effects empirically substantiate three of the hypotheses put forth: (1) that the inverse farm size-productivity relationship translates into an analogous inverse farm size-farm growth association; (2) that enhanced tenure security positively impacts farm growth; and (3) that labor force increases positively affect land accumulation. However, with $R^2$ values of 0.13 and 0.03 in the two models, respectively, and the evidently small magnitude of the above-discussed marginal effects, it should be noted that our relatively comprehensive model cannot account for the bulk of the variation in farm growth rates. Therefore, while we do formally reject Gibrat's Law, the notion of stochastic farm growth may, in fact, be viewed as a reasonable first approximation.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%% Conclusions %%%%%%%%%%%%%
@@ -1033,7 +1219,7 @@ $N$       & \multicolumn{2}{c}{300} & \multicolumn{2}{c}{284} &
 }
 \normalsize
 
-%%%%%%%% Accumulation graphic   %%%%%%%%
+%%%%%%%% Accumulation Graphic   %%%%%%%%
 
 \begin{figure}[tbp]
 \centering
@@ -1042,7 +1228,7 @@ $N$       & \multicolumn{2}{c}{300} & \multicolumn{2}{c}{284} &
 \label{fig: land}
 \end{figure}
 
-%%%%%%%%%%%%%%%%%%%% Systems GMM Estimates %%%%%%%%%%%%%%%%%%%%%%
+%%%%%Systems GMM Estimates %%%%%%%%%%
 
 \footnotesize
 \ctable[
@@ -1052,44 +1238,66 @@ $N$       & \multicolumn{2}{c}{300} & \multicolumn{2}{c}{284} &
 	pos = htbp,
 	label = sysgmm
 ]{lrrrrrr}{
-	\tnote[a]{P-values $<$0.01, 0.05, and 0.10 correspond to $^{***}$, $^{**}$, and $^{*}$, respectively.}
-	\tnote[b]{The subscripts $1, 2, 3$, $4$, and $5$ refer to land operated, titled area, labor, dependents, and age, respectively.}
+	\tnote[a]{P-values $<$0.01, 0.05, and 0.10 correspond to $^{***}$, 
+	$^{**}$, and $^{*}$, respectively.}
+	\tnote[b]{The subscripts $1, 2, 3, 4$, and $5$ refer to titled area, labor, 
+	dependents, experience, and education, respectively.}
+	\tnote[c]{Standard errors are calculated using the 
+	\citet{windmeijer2005} correction.}
 }{ \hline \hline
-& \multicolumn{2}{c}{Land Operated} &\multicolumn{2}{c}{Land Owned}  \\ \hline
-Variable  & \multicolumn{1}{c}{Coeff.}  &  \multicolumn{1}{c}{SE} & \multicolumn{1}{c}{Coeff.} & \multicolumn{1}{c}{SE} \\ \hline
-$d_{1991}$                         & 0.025 & 0.022 &  0.017 & 0.023 \\[-1ex]
-$d_{1994}$                          & 0.014 & 0.019 & -0.004 & 0.023  \\[-1ex]
-$d_{1999}$                          & 0.024 & 0.028 & -0.048 & 0.032 \\[-1ex]
-$\ln x_1$                              & -0.742$^{*}$ & 0.395 & -0.031 & 0.326 \\[-1ex]
-$\ln x_2$                               & 0.123 & 0.209 & -0.173 & 0.311 \\[-1ex]
-$\ln x_3$  	                         & 0.734 & 0.608 & 0.246 & 0.444 \\[-1ex]
-$\ln x_4$                                & -0.050 & 0.491 & 0.498 & 0.592 \\[-1ex]
-$\ln x_5$                                & -1.561$^{*}$ & 0.914 & -0.345 & 0.961 \\[-1ex]
-$\frac{1}{2}\ln(x_1)^2$       & 0.040$^{**}$ & 0.015 & 0.006 & 0.009 \\[-1ex]
-$\ln x_1 \times \ln x_2$        & -0.057$^{***}$ & 0.015 & -0.035$^{***}$ & 0.011 \\[-1ex]
-$\ln x_1 \times \ln x_3$       & 0.022 & 0.028 & -0.023 & 0.027 \\[-1ex]
-$\ln x_1 \times \ln x_4$       & 0.045 & 0.034 & -0.017 & 0.021 \\[-1ex]
-$\ln x_1 \times \ln x_5$        & 0.114 & 0.089 & 0.006 & 0.078 \\[-1ex]
-$\frac{1}{2}\ln(x_2)^2$       & 0.046$^{***}$ & 0.016 & 0.045$^{***}$ & 0.013 \\[-1ex]
-$\ln x_2 \times \ln x_3$       & -0.003 & 0.017 & 0.023 & 0.022 \\[-1ex]
-$\ln x_2 \times \ln x_4$       & -0.023 & 0.019 & -0.004 & 0.020 \\[-1ex]
-$\ln x_2 \times \ln x_5$       & -0.017 & 0.050 & 0.021 & 0.069 \\[-1ex]
-$\frac{1}{2}\ln(x_3)^2$	     & 0.008 & 0.038 & 0.015 & 0.031 \\[-1ex]
-$\ln x_3 \times \ln x_4$	      & -0.006 & 0.040 & -0.032 & 0.036 \\[-1ex]
-$\ln x_3 \times \ln x_5$	      & -0.185 & 0.138 & -0.052 & 0.101  \\[-1ex]
-$\frac{1}{2}\ln(x_4)^2$       & 0.010 & 0.039 & 0.009 & 0.044 \\[-1ex]
-$\ln x_4 \times \ln x_5$	      & -0.010 & 0.107 & -0.108 & 0.133  \\[-1ex]
-$\frac{1}{2}\ln(x_5)^2$       & 0.186 & 0.122 & 0.051 & 0.123 \\[-1ex]
-$d_{2}$                                  & -0.001 & 0.103 & -0.098 & 0.086 \\[-1ex]
-$d_{3}$                                  & -0.040 & 0.061 & -0.046 & 0.047 \\[-1ex]
-$d_{4}$                                   & 0.057 & 0.055 &  0.013 & 0.045  \\[-1ex]
-Instrument No.                  & \multicolumn{2}{c}{195}   &  \multicolumn{2}{c}{193}  \\[-1ex]
-$R^2$                  & \multicolumn{2}{c}{0.13}   &  \multicolumn{2}{c}{0.03}  \\[-1ex]
-$N$                  & \multicolumn{2}{c}{811}   &  \multicolumn{2}{c}{636}  \\ \hline}
+& \multicolumn{2}{c}{FM} &\multicolumn{2}{c}{CM} 
+&\multicolumn{2}{c}{CR} \\ \hline
+Variable  & \multicolumn{1}{c}{Coeff.}  &  \multicolumn{1}{c}{SE} 
+& \multicolumn{1}{c}{Coeff.} & \multicolumn{1}{c}{SE} 
+& \multicolumn{1}{c}{Coeff.} & \multicolumn{1}{c}{SE}\\ \hline
+$\ln y$ & -53.88* & 27.72 & -52.77* & 29.94 & -62.75** & 30.54\\[-1ex]
+$\ln x_1$ & -2.09 & 19.56 & 8.92 & 17.89 & 16.98 & 20.02\\[-1ex]
+$\ln x_2$ & 49.87 & 38.49 & 20.66 & 28.08 & 19.36 & 33.50\\[-1ex]
+$\ln x_3$ & -1.20 & 31.38 & -13.61 & 36.41 & -11.28 & 40.23\\[-1ex]
+$\ln x_4$ & 74.84 & 67.78 & -19.33 & 80.33 & 25.32 & 94.10\\[-1ex]
+$\ln x_5$ & 76.21 & 46.92 & 22.81 & 54.62 & 41.03 & 58.32\\[-1ex]
+$(\ln y)^2$ & 3.51** & 1.49 & 3.58 & 2.33 & 3.31* & 1.75\\[-1ex]
+$\ln y \times \ln x_1$ & -5.97*** & 1.62 & -3.89** & 1.69 & -4.07** 
+& 2.03\\[-1ex]
+$\ln y \times \ln x_2$ & 0.54 & 3.42 & 0.95 & 3.89 & 1.03 & 3.31\\[-1ex]
+$\ln y \times \ln x_3$ & 1.32 & 3.28 & 0.86 & 3.31 & 1.16 & 3.30\\[-1ex]
+$\ln y \times \ln x_4$ & 8.17 & 5.73 & 7.59 & 5.87 & 9.68* & 5.81\\[-1ex]
+$\ln y \times \ln x_5$ & 0.55 & 3.52 & -0.20 & 3.73 & 2.22 & 4.01\\[-1ex]
+$(\ln x_1)^2$ & 5.67*** & 1.68 & 2.65 & 2.10 & 2.50 & 2.11\\[-1ex]
+$\ln x_1 \times \ln x_2$ & 0.61 & 2.15 & -0.79 & 2.48 & -0.77 & 2.20\\[-1ex]
+$\ln x_1 \times \ln x_3$ & 0.40 & 2.05 & -1.11 & 1.96 & -0.99 & 1.74\\[-1ex]
+$\ln x_1 \times \ln x_4$ & 0.63 & 4.15 & 0.23 & 4.26 & -1.50 & 4.30\\[-1ex]
+$\ln x_1 \times \ln x_5$ & -0.36 & 2.43 & -0.11 & 3.30 & -0.38 
+& 3.68\\[-1ex]
+$(\ln x_2)^2$ & 2.96 & 3.46 & 3.42 & 3.72 & 2.25 & 3.58\\[-1ex]
+$\ln x_2 \times \ln x_3$ & -1.61 & 3.57 & -2.01 & 3.72 & -0.81 
+& 3.74\\[-1ex]
+$\ln x_2 \times \ln x_4$ & -11.87 & 9.02 & -4.03 & 6.18 & -3.21 
+& 7.09\\[-1ex]
+$\ln x_2 \times \ln x_5$ & -5.45 & 4.42 & -5.19 & 3.73 & -6.07 
+& 4.75\\[-1ex]
+$(\ln x_3)^2$ & 1.57 & 3.19 & 1.84 & 4.57 & 1.78 & 4.00\\[-1ex]
+$\ln x_3 \times \ln x_4$ & 0.92 & 7.01 & 5.16 & 8.09 & 3.81 & 9.12\\[-1ex]
+$\ln x_3 \times \ln x_5$ & -4.69 & 3.79 & -3.26 & 4.53 & -2.44 
+& 4.62\\[-1ex]
+$(\ln x_4)^2$ & -8.44 & 8.22 & 0.68 & 8.96 & -4.17 & 11.02\\[-1ex]
+$\ln x_4 \times \ln x_5$ & -17.50 & 11.12 & -1.47 & 12.60 & -8.83 
+& 13.63\\[-1ex]
+$(\ln x_5)^2$ & -0.72 & 4.10 & -3.82 & 6.61 & -0.74 & 6.38\\[-1ex]
+Time Dummies & \multicolumn{2}{c}{Yes} & \multicolumn{2}{c}{Yes}   
+& \multicolumn{2}{c}{Yes}\\[-1ex]
+Zero Value Dummies & \multicolumn{2}{c}{Yes} 
+& \multicolumn{2}{c}{Yes}  & \multicolumn{2}{c}{Yes}\\[-1ex]
+Instrument Count & \multicolumn{2}{c}{275} & \multicolumn{2}{c}{128}   
+& \multicolumn{2}{c}{97}\\[-1ex]
+$R^2$  & \multicolumn{2}{c}{0.10} & \multicolumn{2}{c}{0.10}  
+&  \multicolumn{2}{c}{0.11} \\[-1ex]
+$N$  & \multicolumn{2}{c}{820}   &  \multicolumn{2}{c}{820} 
+&  \multicolumn{2}{c}{820} \\ \hline}
 \normalsize
 \newpage
 
-%%%%%%%%%%%%%%%%%%%%%% Hypothesis Tests  %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% Hypothesis Tests  %%%%%%%%%%%%
 
 \footnotesize
 \ctable[
@@ -1099,17 +1307,40 @@ $N$                  & \multicolumn{2}{c}{811}   &  \multicolumn{2}{c}{636}  \\ 
 	pos = htbp,
 	label = tests
 ]{lrrrrrr}{
-          \tnote[a]{P-values $<$0.01, 0.05, and 0.10 correspond to $^{***}$, $^{**}$, and $^{*}$, respectively.}
-	\tnote[b]{The subscripts $1, 2, 3$, $4$, and $5$ refer to land operated, titled area, labor, dependents, and age, respectively.}
+          \tnote[a]{P-values $<$0.01, 0.05, and 0.10 correspond to $^{***}$, 
+          $^{**}$, and $^{*}$, respectively.}
+	\tnote[b]{The subscripts $1, 2, 3, 4$, and $5$ refer to titled area, labor, 
+	dependents, experience, and education, respectively.}
 }{ \hline \hline
-Hypothesis Test & \multicolumn{1}{c}{Land Operated} &\multicolumn{1}{c}{Land Owned}   \\ \hline
-(1)~ Arellano-Bond                      &      1.04  &   -0.16  \\[-1ex]
-(2)~ Hansen                                 &  151.05  & 151.10  \\[-1ex]
-(3)~ $\partial/\partial \ln x_1$   &   -0.13$^{***}$  & -0.11$^{***}$\\[-1ex]
-(4)~ $\partial/\partial \ln x_2$   &    0.12$^{***}$  &   0.09$^{**}$\\[-1ex]
-(5)~ $\partial/\partial \ln x_3$    &   0.08$^{**}$    &   0.04 \\[-1ex]
-(6)~ $\partial/\partial \ln x_4$    &                0.01    &  -0.02\\[-1ex]
-(7)~ $\partial/\partial \ln x_5$    &                0.05    &   0.00 \\ \hline}
+Hypothesis Test & \multicolumn{1}{c}{FM} &\multicolumn{1}{c}{CM}  
+&\multicolumn{1}{c}{CR} \\ \hline
+(1)~ Arellano-Bond                      &     1.10   &   0.93 &  1.05    \\[-1ex]
+(2)~ Hansen                                 & 171.10   & 87.99 & 57.42 \\[-1ex]
+(3)~ Difference-in-Hansen           &   19.07   & 35.12 & 25.82 \\[-1ex]
+(4)~ $\partial/\partial \ln y$       &  -14.86***  & -10.16  & -10.74* \\[-1ex]
+(5)~ $\partial/\partial \ln x_1$   &   14.83*** &   10.62** & 10.43**\\[-1ex]
+(6)~ $\partial/\partial \ln x_2$   &     5.91* & 4.25 &  3.62 \\[-1ex]
+(7)~ $\partial/\partial \ln x_3$    &    2.10  & 1.54 &   2.60   \\[-1ex]
+(8)~ $\partial/\partial \ln x_4$    &    3.92  &  10.61 & 9.64 \\[-1ex]
+(9)~ $\partial/\partial \ln x_5$    &  -0.58   & -3.38 &  3.66 \\ \hline}
 \normalsize
+
+%%%%%%%% Operated vs. Growth   %%%%%%%%
+
+\begin{figure}[tbp]
+\centering
+\includegraphics[width=1\textwidth]{Predicted_Growth.pdf}
+\caption{Predicted growth and land operated}
+\label{fig: pgrowth}
+\end{figure}
+
+%%%%%%%%%% Experiment   %%%%%%%%%%
+
+\begin{figure}[tbp]
+\centering
+\includegraphics[width=1\textwidth]{Predicted_Growth(Experiment).pdf}
+\caption{Predicted growth pre- and post-reform}
+\label{fig: experiment}
+\end{figure}
 
 \end{document}
