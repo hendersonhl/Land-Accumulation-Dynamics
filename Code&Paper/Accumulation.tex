@@ -2,35 +2,24 @@
 %%%%%%%%%%%%% Outline %%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Word target: 7,500 words
+% Word target: 7,500 words (currently 7,116)
 
 % I.   Introduction (~850) (currently ~850)
 % II. Theoretical background (~1,400 words) (currently 1,400)
 % III. Background and Data (~1,500 words) (currently 1,500)
  % IV. Methodology (~1,500 words) (currently 1,500)
-% V.  Results (~1,500 words) 
+% V.  Results (~1,500 words) (currently 1,500)
 % VI. Conclusion (~750 words) 
 
 % To do:
-% (1) Write abstract
-% (2) Results:
+% (1) Results:
 %	- Confidence intervals
-%	- Generate graphs
-% (4) Write conclusions
-
-% Notes:
-% (1) Gibrat's Law
-%    - Strong vs. weak form? (Bakucs pg. 792) (Sutton pg. 44)
-%    (Clark pg. 56) (Shapiro pg. 477)
-%    - Three versions of Gibrat's Law? (Bakucs pg. 792) (Sutton pg. 44)
-%    (Clark pg. 56) (Shapiro pg. 477)
-% (2) Dynamic panel models
-%    - IV style vs. GMM style instruments (Roodman pg. 24 and pg. 38)
-%    - Redundance of instruments
-%    - Orthogonal deviations (increases observation count?)
-%    - Selection
-%    - Number of instruments
-%    - First step H matrix (Roodman pg. 32)
+%	- Gini graphs?
+% (2) Write conclusions
+% (3) General
+%	- Double check all statistics (namely observation numbers)
+%	- Double check little examples in the methods section
+%	- Non-linear effects
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%% Preamble %%%%%%%%%%%%%
@@ -86,28 +75,30 @@ Paul Winters \\
 \maketitle
 
 \begin{abstract}
-%The examination of land accumulation dynamics in developing country 
-%agriculture can shed light on the determinants of and impediments to land 
-%access among rural households and can thereby inform access-promoting 
-%policies. 
-%Gibrat's Law -- which posits that farm growth is a stochastic process, 
-%operating independently of farm size -- is one of the earliest and most 
-%influential theories of such accumulation dynamics, but has been subject to 
-%virtually no empirical scrutiny in the context of developing country 
-%agriculture. 
-%In an attempt to address this shortcoming, with unique panel data for the 
-%years 1991, 1994, 1999, 2002, and 2007, we employ a generalized method of 
-%moments (GMM) estimator for dynamic panel models to examine Gibrat's 
-%Law and potential deviations thereof for the case of Paraguay. 
-%The results suggest that farm growth indeed varies systematically with select 
-%observable characteristics (i.e.\ land operated, titled area, and family labor force), 
-%which implies a formal rejection of Gibrat's Law. 
-%However, our relatively comprehensive model cannot account for the bulk of 
-%the variation in farm growth rates, which implies that the notion of stochastic 
-%farm growth may, in fact, be viewed as a reasonable first approximation. \\
-%\\
-%\textit{Key words}: Dynamic panel models; farm growth; Gibrat's Law; Paraguay
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[ABSTRACT HERE]
+Inegalitarian distributions of agricultural landholdings in developing countries
+have been found to diminish economic growth, mitigate the poverty-reducing
+effects of existing growth, and have adverse effects on agricultural 
+productivity.
+While the consequences of inequality are relatively well understood, the 
+increasing prominence of land rental and sales markets has raised 
+important questions regarding the forces driving distributional outcomes 
+when private initiative is predominant.
+With unique panel data from Paraguay for the years 1991, 1994, 1999, 2002, 
+and 2007, we employ a generalized method of moments (GMM) estimator 
+for dynamic panel models in an effort to simultaneously test the leading 
+theories of such land accumulation dynamics. 
+The results suggest that farm growth indeed varies systematically with 
+select observable characteristics (i.e.\ land operated and titled area), 
+which implies a formal rejection of stochastic growth theories (i.e.\
+Gibrat's Law). 
+Furthermore, the estimates suggest that a dualistic agrarian structure is 
+the likely product of the unfettered operation of land markets, though
+land titling interventions may possess the capacity to reduce the rate at 
+which inequality manifests. \\
+\\
+\textit{Key words}: Dynamic panel models; land accumulation; 
+land inequality; Paraguay \\
+\textit{JEL codes}:  C23; O13; O54; Q15
 \end{abstract}
 \thispagestyle{empty}
 \end{titlepage}
@@ -219,9 +210,10 @@ The results of the analysis suggest that farm growth indeed varies
 systematically with select observable characteristics 
 (i.e.\ land operated and titled area), which implies a formal rejection of 
 Gibrat's Law. 
-However, our relatively comprehensive model cannot account for the bulk of 
-the variation in farm growth rates, which suggests that the notion of 
-stochastic farm growth may be viewed as a reasonable first approximation.
+Furthermore, the estimates suggest that a dualistic agrarian structure is the 
+likely product of the unfettered operation of land markets, though land titling 
+interventions may possess the capacity to reduce the rate at which inequality 
+manifests.
 
 The rest of the paper is organized as follows: Section \ref{sec: theories} 
 elaborates upon the leading theories of land accumulation dynamics, 
@@ -263,7 +255,7 @@ Under the assumption that $\varepsilon$ is i.i.d.\ with mean $\mu$ and
 variance $\sigma^2$, as $t \to \infty$ the distribution of $\log(x_t)$ is 
 approximately normal with mean $t \cdot \mu $ and variance 
 $t \cdot \sigma^2$. 
-Gibrat then contended that firm growth $g_t \equiv \log(x_t) - \log(x_{t-1}) 
+Gibrat thus contended that firm growth $g_t \equiv \log(x_t) - \log(x_{t-1}) 
 \approx \varepsilon_t$ is a stochastic process and the limiting distribution of 
 firm size is log-normal.
 Most importantly, the central testable hypothesis is that firm growth is 
@@ -446,14 +438,14 @@ Food exports, in addition, represent 87 percent of total merchandise exports
 With an estimated Gini coefficient of 0.93, the distribution of landholdings in 
 Paraguay is one of the most inegalitarian in the world \citep{lipton2009}. 
 On the one hand, just over 63 percent of producers operate landholdings less 
-than 10 hectares, but account for just over 2 percent of total farming area.  
-On the other hand, under 2 percent of producers operate landholdings 
+than ten hectares, but account for just over two percent of total farming area.  
+On the other hand, under two percent of producers operate landholdings 
 greater than 1,000 hectares and account for nearly 80 percent of total farm 
 land. 
 Compounding issues of land inequality is the existence of pervasive tenure 
 insecurity, as approximately 27 percent of producers do not have lawful 
 permission to use the land which they operate. 
-Moreover, of those producers operating less than 5 hectares, 36 percent are 
+Moreover, of those producers operating less than five hectares, 36 percent are 
 classified as illegal squatters \citep{mag2012}. 
 
 Unlike much of Latin America, the development of Paraguay's 
@@ -502,21 +494,21 @@ information on the distribution of farms and landholdings by farm size
 categories, respectively. 
 Looking at the data for 1956, it is evident that the Stroessner regime 
 inherited considerable inequality as nearly 70 percent of producers 
-operated farms less than 10 hectares, but accounted for just over 2 percent 
-of the total land cultivated.
-Conversely, in that same year, just over 3 percent of producers operated
+operated farms less than ten hectares, but accounted for just over two 
+percent of the total land cultivated.
+Conversely, in that same year, just over three percent of producers operated
 farms greater than 100 hectares, but accounted for nearly 93 percent
 of the total land cultivated.
 Largely due to the regime's land colonization programs, it is apparent that 
 the number of farms and area cultivated expanded greatly by 1991. 
 The inegalitarian distribution of landholdings, however, remained intact, as in 
-that year the largest 4 percent of producers operated 88 percent of total 
+that year the largest four percent of producers operated 88 percent of total 
 land cultivated.
 Finally, the liberalization process that began after 1991 appears to have been
 accompanied by a further concentration of landholdings, as the percentage of 
-land operated by producers with less than 10 hectares decreased from 
-approximately 3 to 2 percent whereas that operated by producers with more 
-than 100 hectares increased from 88 to over 92 percent.
+land operated by producers with less than ten hectares decreased from 
+approximately three to two percent whereas that operated by producers with 
+more than 100 hectares increased from 88 to over 92 percent.
 
 As gaining insight into the micro-level forces inducing distributional changes 
 throughout the liberalization period is greatly facilitated by panel data, it is thus 
@@ -582,12 +574,12 @@ Three patterns are worth noting.
 First, the degree of variability in each series is particularly interesting, as it is 
 suggestive of non-negligible land market activity and potentially interesting
 accumulation dynamics.
-Second, while the 5-10 ha cohort seemingly stagnated throughout the 
+Second, while the 5-10 hectare cohort seemingly stagnated throughout the 
 survey period, the other groups witnessed episodes of considerable growth.
-The 10-20 ha cohort, for example, witnessed an approximate doubling of 
+The 10-20 hectare cohort, for example, witnessed an approximate doubling of 
 mean farm size from 1999 to 2007.
-Finally, mean farm size of the $<$5 ha cohort actually surpassed that of the 
-5-10 ha cohort by 2002 and remained (slightly) greater in 2007.
+Finally, mean farm size of the $<$5 hectare cohort actually surpassed that of the 
+5-10 hectare cohort by 2002 and remained (slightly) greater in 2007.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%% Methodology %%%%%%%%%%%%
@@ -879,7 +871,7 @@ As it is the primary variable of interest, each test was conducted with three
 alternative specifications of land operated (i.e.\ in levels, logarithms, and 
 growth rates), yielding a total of six tests.
 In only one such test do we reject the null hypothesis of no attrition bias at 
-the 5 percent level, thereby suggesting that the issue of attrition is likely 
+the five percent level, thereby suggesting that the issue of attrition is likely 
 minimal.% 
 \footnote{The results of the tests are available upon request.}
 Accordingly, we avoid undue complication of the estimation procedure 
@@ -927,13 +919,13 @@ bottom of the corresponding column.
  
 Hypothesis tests (1)-(3) in Table \ref{tests} present the results from the 
 specification tests discussed in the previous section. 
-Hypothesis test (1) displays z-scores from the \citet{arellano1991} test 
+Hypothesis test (1) displays $z$-scores from the \citet{arellano1991} test 
 for first-order serial correlation in the disturbances.
 Hypothesis test (2) displays test statistics from the \citet{hansen1982} 
 test for overidentifying restrictions.
 Hypothesis test (3) presents a difference-in-Hansen test statistic, which 
 tests the validity of the instrument subset associated with the levels model
-(i.e.\ the differenced instruments introduced in Eq.\ [\ref{znew}]) .
+(i.e.\ the differenced instruments introduced in Eq.\ [\ref{znew}]).
 Looking at the FM column, it is evident that we fail to reject the null 
 hypothesis of no serial correlation for hypothesis test (1), and instrumental
 exogeneity for hypothesis tests (2) and (3).
@@ -987,7 +979,7 @@ Further, while the marginal effect on titled area ($x_1$) remains positive
 and statistically significant, the marginal effects associated with land operated
 ($y$) and labor ($x_2$) are now statistically insignificant.
 Further yet, we see that the magnitude of the marginal effect on titled area
-reduced to 10.62 from 14.83 in the FM regression.
+is reduced to 10.62 from 14.83 in the FM regression.
 It is thus apparent that the results are moderately sensitive to the instrument
 count.
 As such, it is beneficial to consider reducing the number of instruments further.
@@ -1037,9 +1029,43 @@ Most importantly, however, the figure conforms surprisingly well to the
 predictions of the model put forth by \citet{carter1993}, as the authors
 contended that a dualistic agrarian structure is the likely product of the 
 unfettered operation of the land market.
- 
 
-%The above results, overall, suggest that farm growth indeed varies systematically with select observable characteristics (i.e.\ land operated, titled area, and labor), which implies a rejection of Gibrat's Law. Perhaps more interestingly, the signs associated with the statistically significant effects empirically substantiate three of the hypotheses put forth: (1) that the inverse farm size-productivity relationship translates into an analogous inverse farm size-farm growth association; (2) that enhanced tenure security positively impacts farm growth; and (3) that labor force increases positively affect land accumulation. However, with $R^2$ values of 0.13 and 0.03 in the two models, respectively, and the evidently small magnitude of the above-discussed marginal effects, it should be noted that our relatively comprehensive model cannot account for the bulk of the variation in farm growth rates. Therefore, while we do formally reject Gibrat's Law, the notion of stochastic farm growth may, in fact, be viewed as a reasonable first approximation.
+Table \ref{tests} also illustrated that titled area exerts influence on land
+accumulation. 
+Accordingly, Figure \ref{fig: experiment} depicts the relationship between 
+the annual percentage growth rate in operational landholdings and initial land 
+operated after a hypothetical land titling intervention.
+The \emph{ex ante} curve is identical to that plotted in Figure 
+\ref{fig: pgrowth} and is provided for purposes of comparison.
+The \emph{ex post} curve was constructed analogously, but with one
+simple change: the predicted values from the CR regression were calculated
+after substituting the quantity of land owned for titled area.
+This change reflects a situation in which a hypothetical property rights 
+intervention provides formal title to all land owned by the surveyed
+households.
+Interestingly, the accumulation barriers remain identical to those of Figure
+\ref{fig: pgrowth} (i.e.\ 5.5 and 350 hectares).
+The hypothetical intervention, however, appears to have reduced the rate at
+which the 5.5-350 ($>$ 350) hectare regime decumulates (accumulates) 
+operational landholdings.
+While a tendency toward dualism persists, property rights reform may 
+thus possess the capacity to reduce the rate at which inequality 
+manifests. 
+Overall, the results associated with titled area conform reasonably well to 
+the theoretical model put forth in \citet{carter1998b}.
+
+The above results, as a whole, suggest that farm growth indeed varies 
+systematically with select observable characteristics (i.e.\ land operated and 
+titled area), which implies a formal rejection of Gibrat's Law. 
+Perhaps more interestingly, the signs associated with the statistically 
+significant effects empirically substantiate two of the hypotheses put forth: 
+(1) that initial land operated is an important determinant of land 
+accumulation \citep{carter1993} and (2) that titled area may exert a
+non-negligible influence on farm growth \citep{carter1998b}.
+Furthermore, the estimates suggest that a dualistic agrarian structure is the 
+likely product of the unfettered operation of land markets, though land titling
+interventions may possess the capacity to reduce the rate at which inequality 
+manifests.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%% Conclusions %%%%%%%%%%%%%
@@ -1047,6 +1073,17 @@ unfettered operation of the land market.
 
 \section{Conclusions}
 \label{sec: conclusions}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[CONCLUSIONS HERE]
+
+% Outline:
+% Land inequality is of policy interest
+% The causes are not well understood
+% We do this ...
+% The results suggest this ...
+% Policy implications
+% Limitations 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%% References %%%%%%%%%%%%
