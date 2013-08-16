@@ -1,16 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%% Outline %%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Word target: 7,500 words (currently 7,465)
-
-% To do:
-% (1) Smoosh Tables 1 and 2 together
-% (2) Confidence intervals
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%% Preamble %%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Word target: 8,000 words (currently 7,750)
 
 % Declare document class and miscellaneous packages
 \documentclass[english]{article}
@@ -40,7 +32,16 @@
 urlcolor=black, pdftex}
 
 % Title page
-\title{Land Accumulation Dynamics in Developing Country Agriculture}
+\title{Land Accumulation Dynamics in Developing Country Agriculture%
+\thanks{The authors would like to thank Laura Schechter for providing the
+data for the project, Kevin Curran for assisting with data cleaning, and the 
+Inter-American Development Bank (IDB) for financial support.
+Further, for their helpful comments we would like to thank participants of 
+the IDB's 2012 workshop Evaluating the Impact 
+of Tenure Security Interventions in Developing Countries as well as those of the 
+2013 Annual World Bank Conference on Land and Poverty.
+The views expressed here are those of the authors and should not be 
+attributed to the IDB or its member countries.}}
 \author{
 Heath Henderson, Leonardo Corral, Eric Simning\\
 \textit{Inter-American Development Bank} \\
@@ -121,8 +122,8 @@ of land have adverse effects on agricultural productivity
 While documentation of the consequences of inequality is prevalent, the causes 
 are less well understood.
 Historically, in developing countries the allocation and reallocation of 
-agricultural landholdings over time has been driven by inheritance and 
-administrative processes (e.g.\ land reform) 
+agricultural landholdings has been driven by inheritance and administrative 
+processes (e.g.\ land reform) 
 \citep{binswanger1995, deininger2001, lipton2009}.
 The increasing prominence of land rental and sales markets, however, raises 
 questions regarding the forces driving land accumulation (or decumulation) 
@@ -133,10 +134,11 @@ We define land accumulation as ``the acquisition or gradual gathering of land
 use rights or land access for purposes of agricultural production.''  
 Notably, this includes expansion of the farm unit via legal (e.g.\ ownership, 
 rental, or sharecropping arrangements) or extralegal (e.g.\ squatting) means.
-While we use the terms land accumulation and farm growth synonymously, 
-land accumulation appears less ambiguous as farm growth can occur along
-multiple dimensions (e.g.\ growth in the quantity or value of output, capital
-accumulation, employment increases, etc.).}
+As opposed to the term farm growth, land accumulation appears less ambiguous 
+as farm growth can occur along multiple dimensions (e.g.\ growth in the quantity 
+or value of output, capital accumulation, employment increases, etc.).
+We do, however, use the terms land accumulation and farm growth 
+synonymously throughout.}
 Theories of such land accumulation dynamics have invoked stochastic growth 
 processes, factor market imperfections, or institutional/legal considerations, 
 among others, in attempting to explain observed distributional outcomes.
@@ -148,8 +150,8 @@ dynamics, which is known as ``Gibrat's Law of Proportionate Effects.''
 Gibrat's Law posits that firm growth is a stochastic process, operating 
 independently of firm size, and the limiting distribution of firm size is 
 log-normal \citep{gibrat1931, sutton1997}.
-For the agricultural sector, Gibrat's Law then suggests that farm size 
-changes are inherently stochastic.
+For the agricultural sector, Gibrat's Law thus suggests that land 
+accumulation is inherently stochastic.
 The theory has received considerable empirical attention in the context
 of developed country agriculture.
 For example, \citet{jarrett1968}, \citet{shapiro1987}, \citet{weiss1999}, 
@@ -159,8 +161,11 @@ Australia, Canada, Austria, and the United States, respectively, whereas
 using data from Canada, and \citet{melhim2009b} found similar support 
 for the United States.
 Conversely, the only empirical analysis to date set within the context of 
-developing country agriculture is from \citet{shergill1991} who found 
-support for Gibrat's Law for the case of India.
+developing country agriculture is \citet{shergill1991} who found support 
+for Gibrat's Law for the case of India.
+To the extent that developing countries have less well-defined property rights 
+or even less well-functioning land and financial markets, we would expect 
+the developed/developing distinction to be salient when testing Gibrat's Law.
 
 Regarding institutional/legal considerations, a more nuanced example can be 
 found in the empirical literature exploring the economic effects of land 
@@ -183,7 +188,10 @@ to be conclusively examined and quantified.
 \citet{boucher2005}, for example, explored distributional outcomes before 
 and after land market liberalization in Honduras and Nicaragua in the 1990s, 
 but the land formalization effect was not uniquely identified as formalization 
-initiatives were but one component of the reforms.
+initiatives were but one component of the reforms.%
+\footnote{The reforms, for example, included measures to remove 
+government from all forms of direct land redistribution, to end 
+prohibitions on land rental and sale, and to activate private credit markets.}
 
 In this context, we seek to further the literature examining the causes of 
 inegalitarian distributions of agricultural landholdings in developing 
@@ -193,8 +201,8 @@ appropriate setting due to the country's history of land inequality and conflict
 as well as the scope of its liberalization efforts.
 With unique panel data for the years 1991, 1994, 1999, 2002, and 2007, we thus 
 employ a generalized method of moments (GMM) estimator for dynamic panel 
-models in an effort to simultaneously test the leading theories of land 
-accumulation dynamics.
+models in an effort to simultaneously test the leading theories of micro-level 
+land accumulation dynamics.
 The results of the analysis suggest that farm growth indeed varies 
 systematically with select observable characteristics 
 (i.e.\ land operated and titled area), which implies a formal rejection of 
@@ -280,16 +288,17 @@ $\mu(T + \varepsilon)$ is the shadow price of capital.
 The authors found that the smallest farm units witness relatively high 
 reservation prices due to their high marginal unemployment in the labor 
 market. 
-Since they cannot be easily employed off farm, they employ labor on farm 
-making land relatively valuable.
+That is, the relatively high valuation of land follows from their low 
+opportunity cost of labor.
 Medium-sized farms also demonstrated high reservation prices due to
 their ability to overcome labor and capital market imperfections. 
-The ability of these medium-sized farms to access credit and to avoid labor 
-supervision issues makes land relatively valuable to them.
+That is, the relatively high valuation of land follows from their simultaneous 
+ability to access credit and avoid labor supervision issues.
 Therefore, as reservation prices are expected to be highly correlated with farm 
 growth rates, it is contended that farm size is an important determinant of 
-farm growth, though the relationship may be highly non-linear with the 
-smallest and medium-sized farms most likely to accumulate.%
+farm growth or land accumulation, though the relationship may be highly 
+non-linear with the smallest and medium-sized farms most likely to 
+accumulate.%
 \footnote{In other words, ``the model identifies an agrarian structure 
 composed of mid-sized farms, and poverty refuge \emph{minifundias} as a 
 likely outcome of the unfettered operation of the land market'' 
@@ -309,12 +318,11 @@ that tenure insecurity may depress incremental earnings from land by affecting
 factor allocations; and (3) the incorporation of $\phi$ in $\mu(\cdot)$ reflects 
 the fact that tenure insecurity may have credit supply effects due to the 
 collateralizability of land.
-Thus, all else being equal, tenure insecurity reduces incentives to accumulate
-land as $\partial \rho / \partial \phi < 0$.
+Thus, all else equal, tenure insecurity reduces incentives to accumulate land 
+as $\partial \rho / \partial \phi < 0$.
 There may, however, be important interaction effects between tenure insecurity
-and land endowments as credit markets may persistently exclude the 
-lesser-endowed regardless of the legal collateralizability of their land 
-\citep{carter1988}.
+and land endowments as the lesser-endowed tend to be excluded from credit 
+markets regardless of the legal collateralizability of their land \citep{carter1988}.
 
 Turning to the life cycle hypothesis, \citet{chayanov1966} was among the first 
 to suggest that land accumulation is intimately tied to the growth of the 
@@ -352,7 +360,7 @@ efficiency considerations.
 For a firm of type $\theta$, $x_t = \xi (\eta_t)$ where $\xi (\cdot)$ is a 
 positive, strictly increasing, and continuous function, and 
 $\eta_t = \theta + \varepsilon_t$ where $\varepsilon_t \sim N(0,\sigma^2)$. 
-While $\theta$ is unknown to a given firm, the distribution of $\theta$ across 
+While $\theta$ is unknown for a given firm, the distribution of $\theta$ across 
 firms is known. 
 Further, $\eta_t$ can be inferred by observing costs at time $t$. 
 Letting $n$ be the age of a given firm and 
@@ -404,22 +412,22 @@ technology adoption costs over a greater quantity of output.}
 
 This collection of theories offers a series of hypotheses regarding land 
 accumulation dynamics.
-Pure stochastic growth would suggest that none of the other stated factors 
-matter and that an analysis of farm growth should yield no statistically
-significant results. 
+Pure stochastic growth suggests that land accumulation is independent of 
+producer-level characteristics and appropriately constructed hypothesis tests
+should yield no statistically significant results. 
 Carter and Mesbah's (\citeyear{carter1993}) model attributes patterns of land 
 accumulation to labor and capital market imperfections, and posits a link 
 between land endowments and farm growth. 
-The addition of institutional/legal considerations indicates that land 
-titling may affect land accumulation while Chayanov's 
-(\citeyear{chayanov1966}) model highlights the importance of household 
-demographics, particularly the influence of dependents and labor. 
-Finally, the learning model and structural evolution models focus on two 
-related factors, experience and human capital, thereby suggesting a role for 
-years working in farming as well as the level of education of the farmer. 
-The objective of the analysis is then to identify whether any of these factors 
-matter and the degree to which they matter, thus simultaneously testing 
-the leading theories of land accumulation dynamics.
+Institutional/legal considerations imply that tenure security may affect land 
+accumulation while Chayanov's (\citeyear{chayanov1966}) model highlights 
+the importance of demographics, particularly the influence of household 
+labor and dependents. 
+Finally, the learning and structural evolution models focus on two related 
+factors, experience and human capital, thereby suggesting a role for years 
+working in agriculture and the education level of the producer. 
+The objective of the analysis is then to identify whether and to what extent
+the stated factors influence farm growth, thus simultaneously testing the 
+leading theories of land accumulation dynamics.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%% Data %%%%%%%%%%%%%
@@ -453,8 +461,8 @@ On the other hand, under two percent of producers operate landholdings
 greater than 1,000 hectares and account for nearly 80 percent of total farm 
 land. 
 Compounding issues of land inequality is the existence of pervasive tenure 
-insecurity, as approximately 27 percent of producers do not have lawful 
-permission to use the land which they operate. 
+insecurity, as approximately 27 percent of producers do not have rights over 
+the land they operate.
 Moreover, of those producers operating less than five hectares, 36 percent are 
 classified as illegal squatters \citep{mag2012}. 
 
@@ -499,8 +507,9 @@ Thus, legislation in the post-Stroessner era reflects the emergence of liberal
 democratic values and a shift toward neoliberal economic policies
 \citep{danielsen2009}. 
 
-For the years 1956 to 2008, Table \ref{distfl} provides information on the 
-distribution of farms and landholdings by farm size categories. 
+Based on agricultural census data for the years 1956 to 2008, Table \ref{distfl} 
+provides information on the distribution of farms and landholdings by farm 
+size categories. 
 Looking at the data for 1956, it is evident that the Stroessner regime 
 inherited considerable inequality as nearly 70 percent of producers 
 operated farms less than ten hectares, but accounted for just over two 
@@ -815,9 +824,9 @@ labor, dependents, experience, and education, respectively,%
 \footnote{See Table \ref{def} for variable definitions.} 
 $\alpha_i$ is the producer-specific effect, and $u_{i,t}$ is the error term. 
 Approximating the growth function $g(\cdot)$ by a second-order expansion 
-in the logs (i.e.\ a series of quadratic and interaction terms) and augmenting 
-the basic model with time dummies results in the empirical model to be 
-estimated.%
+in the logs (i.e.\ utilizing a series of quadratic and interaction terms) and 
+augmenting the basic model with time dummies results in the empirical 
+model to be estimated.%
 \footnote{\label{note: zvdum}In situations where scaling is necessary to 
 permit logarithmic transformation of zero-valued explanatory variables, 
 we employ the dummy variable procedure outlined in \citet{battese1997}, 
@@ -851,10 +860,9 @@ general human capital are influenced by formal education, the effect of
 education on land accumulation is \emph{a priori} ambiguous.%
 \footnote{Data limitations preclude distinguishing between 
 agricultural-specific and general human capital.}
-Finally, although some of these factors may be significant, the magnitude of 
-estimates may be minimal, which would still suggest that land accumulation 
-is largely a stochastic process--that is, Gibrat's Law largely holds conditional 
-on a few key factors.
+Finally, it is important to note that although some of these factors may be 
+significant, lack of explanatory power may suggest that Gibrat's Law largely 
+holds conditional on a few key covariates.
 
 Note that Eq.\ (\ref{emodel}) is simply a special case of the 
 autoregressive-distributed lag model previously discussed. 
@@ -1099,9 +1107,9 @@ empirically substantiated two of the hypotheses put forth: (1) that initial land
 operated is an important determinant of land accumulation 
 \citep{carter1993} and (2) that titled area may exert a non-negligible 
 influence on farm growth \citep{carter1998b}.
-As farm growth was found to vary systematically with select observable 
-characteristics (i.e.\ land operated and titled area), we formally rejected
-the theory of stochastic growth (i.e.\ Gibrat's Law).
+As land accumulation was thus found to vary systematically with select 
+observable characteristics (i.e.\ land operated and titled area), we formally 
+rejected the theory of stochastic growth (i.e.\ Gibrat's Law).
 
 Interestingly, the estimates suggested that a dualistic agrarian structure is 
 the likely product of the unfettered operation of land markets, though land 
@@ -1124,7 +1132,7 @@ such interventions were accompanied by policies to improve the functioning
 of credit markets.
 
 Finally, although we consider our analysis to be an important advance in the 
-understanding of land inequality in developing countries, it is important to 
+understanding of land inequality in developing countries, it is beneficial to 
 recognize its limitations.
 First, for reasons of data availability and institutional context, we focused
 exclusively on the case of Paraguay. 
