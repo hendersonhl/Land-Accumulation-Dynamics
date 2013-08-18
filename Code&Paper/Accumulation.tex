@@ -2,12 +2,12 @@
 %%%%%%%%%%%% Preamble %%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Word target: 8,000 words (currently 7,750)
+% Word target: 8,000 words (currently 7,814)
 
 % Declare document class and miscellaneous packages
 \documentclass[english]{article}
 \usepackage{natbib}
-\usepackage{amsmath}
+\usepackage[leqno]{amsmath}
 \usepackage{mathrsfs}
 \usepackage{amssymb}
 \usepackage{mathtools}
@@ -19,11 +19,13 @@
 \usepackage{IEEEtrantools}
 \usepackage{multirow, bigdelim}
 \usepackage{enumerate}
-\usepackage[normalsize]{caption}
+\usepackage[normalsize, bf]{caption}
 \usepackage{afterpage}
 \usepackage[all]{nowidow}
 \usepackage{listings}
-%\usepackage{fullpage}
+\usepackage{fullpage}
+\usepackage{endnotes}
+\let\footnote=\endnote
 \urlstyle{rm}
 
 %Hyper-references
@@ -38,15 +40,21 @@ data for the project, Kevin Curran for assisting with data cleaning, and the
 Inter-American Development Bank (IDB) for financial support.
 Further, for their helpful comments we would like to thank participants of 
 the IDB's 2012 workshop Evaluating the Impact 
-of Tenure Security Interventions in Developing Countries as well as those of the 
-2013 Annual World Bank Conference on Land and Poverty.
+of Tenure Security Interventions in Developing Countries as well as those of 
+the 2013 Annual World Bank Conference on Land and Poverty.
 The views expressed here are those of the authors and should not be 
 attributed to the IDB or its member countries.}}
 \author{
-Heath Henderson, Leonardo Corral, Eric Simning\\
+Heath Henderson\thanks{Corresponding author;
+1300 New York Avenue NW, Washington, DC 20577;
+Tel: +1 202 623 3860; Fax: +1 202 312 4202;
+ Email: heathh@iadb.org.}, 
+Leonardo Corral, Eric Simning\\
+\textit{Office of Strategic Planning and Development Effectiveness} \\
 \textit{Inter-American Development Bank} \\
 \\
 Paul Winters \\
+\textit{Department of Economics}\\
 \textit{American University}
 \\ \\
 }
@@ -104,6 +112,7 @@ land inequality; Paraguay \\
 \section{Introduction}
 \label{sec: intro}
 
+\noindent
 The distribution of agricultural landholdings in developing countries is a 
 relatively well-documented source of economic inefficiency.
 Whether due to multiplier effects \citep{mellor1976}, credit rationing 
@@ -212,7 +221,7 @@ likely product of the unfettered operation of land markets, though land titling
 interventions may possess the capacity to reduce the rate at which inequality 
 is manifested.
 
-The rest of the paper is organized as follows: Section \ref{sec: theories} 
+The rest of the article is organized as follows: Section \ref{sec: theories} 
 elaborates upon the leading theories of land accumulation dynamics, 
 Section \ref{sec: data} provides background on Paraguay as well as discusses 
 the available data, Section \ref{sec: methodology} outlines the methodological 
@@ -227,7 +236,7 @@ of the analysis, and Section \ref{sec: conclusions} concludes.
 \label{sec: theories}
 
 The leading theories of farm growth or land accumulation dynamics 
-considered in this paper are six-fold and are classified by the primary 
+considered in this article are six-fold and are classified by the primary 
 phenomenon invoked: (1) stochastic growth processes; (2) factor market 
 imperfections; (3) institutional/legal considerations; (4) the life cycle 
 hypothesis; (5) heterogeneous managerial experience; and (6) differential 
@@ -1099,7 +1108,7 @@ agricultural land is allocated and reallocated, an improved understanding of
 land accumulation dynamics is of considerable policy interest.
 While theories of such accumulation dynamics are relatively numerous, 
 empirical scrutiny of the associated hypotheses is relatively scarce.
-With unique panel data from Paraguay, in this paper we employ a 
+With unique panel data from Paraguay, in this article we employ a 
 generalized method of moments (GMM) estimator for dynamic panel 
 models in an effort to simultaneously test the leading theories.
 The signs associated with the statistically significant effects 
@@ -1144,6 +1153,13 @@ estimation procedure and focused on surviving farms.
 Future research may thus consider exploring similar research questions in 
 other countries/settings, particularly with emphasis on wider panel data 
 sets and adjustments for issues of attrition.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% Endnotes %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\theendnotes
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%% References %%%%%%%%%%%%
@@ -1173,13 +1189,13 @@ sets and adjustments for issues of attrition.
 
 \footnotesize
 \ctable[
-cap = {Distribution of farms and land by farm size},
-caption = {Distribution of farms and land by farm size},
+cap = {Distribution of Farms and Land by Farm Size},
+caption = {\textbf{Distribution of Farms and Land by Farm Size}},
 captionskip = -2ex,
 pos=htb,
 label = {distfl}
 ]{lrrrr}{
-\tnote[a]{Data for the years 1956-1991 is from \citet{danielsen2009} and data 
+\tnote[]{Note: Data for the years 1956-1991 is from \citet{danielsen2009} and data 
 for the year 2008 is from \citet{mag2012}.}
 }{\hline \hline
 & \multicolumn{1}{c}{1956} & 
@@ -1213,7 +1229,7 @@ Distribution of land: \\
 %%%%%%%%%% Variable Definitions  %%%%%%%%%%
 \footnotesize
 \begin{longtable}{l  p{10.5cm}}
-\caption[Variable definitions]{Variable definitions} \\[-2ex] 
+\caption[Variable Definitions]{\textbf{Variable Definitions}} \\[-2ex] 
 
 %This is the header for the first page of the table...
 \hline \hline \\[-5ex]
@@ -1258,18 +1274,19 @@ Education ($x_5$) & Years of education of the household head \\ \hline
 \label{def}
 \end{longtable}
 \normalsize
+\clearpage
 
 %%%%%%%%% Descriptive Statistics   %%%%%%%%%
 
 \footnotesize
 \ctable[
-cap = {Descriptive statistics},
-caption = {Descriptive statistics},
+cap = {Descriptive Statistics},
+caption = {\textbf{Descriptive Statistics}},
 captionskip = -2ex,
 pos=htb,
 label = {desc}
 ]{lrrrrrrrrrr}{
-\tnote[a]{The variables experience and education have only 291 observations
+\tnote[]{Note: The variables experience and education have only 291 observations
 for the year 1991. In the analysis, however, we utilize all 300 observations for 
 the other variables.}
 }{\hline \hline
@@ -1298,32 +1315,32 @@ $N$       & \multicolumn{2}{c}{300} & \multicolumn{2}{c}{284} &
 \multicolumn{2}{c}{446} \\ \hline
 }
 \normalsize
+\clearpage
 
 %%%%%%%% Accumulation Graphic   %%%%%%%%
 
-\begin{figure}[tbp]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=1\textwidth]{Land.pdf}
-\caption{Mean farm size by cohort and year}
+\includegraphics[width=0.75\textwidth]{Land.pdf}
+\caption{\textbf{Mean farm size by cohort and year}}
 \label{fig: land}
 \end{figure}
+\clearpage
 
 %%%%%Systems GMM Estimates %%%%%%%%%%
 
 \footnotesize
 \ctable[
-	cap = {System GMM estimates},
-	caption = {System GMM estimates},
+	cap = {System GMM Estimates},
+	caption = {\textbf{System GMM Estimates}},
 	captionskip = -2ex,
 	pos = htbp,
 	label = sysgmm
 ]{lrrrrrr}{
-	\tnote[a]{P-values $<$0.01, 0.05, and 0.10 correspond to $^{***}$, 
-	$^{**}$, and $^{*}$, respectively.}
-	\tnote[b]{The subscripts $1, 2, 3, 4$, and $5$ refer to titled area, labor, 
-	dependents, experience, and education, respectively.}
-	\tnote[c]{Standard errors are calculated using the 
-	\citet{windmeijer2005} correction.}
+	\tnote[]{Note: P-values $<$0.01, 0.05, and 0.10 correspond to $^{***}$, 
+	$^{**}$, and $^{*}$, respectively. The subscripts $1, 2, 3, 4$, and $5$ refer 
+	to titled area, labor, dependents, experience, and education, respectively.
+	Standard errors are calculated using the \citet{windmeijer2005} correction.}
 }{ \hline \hline
 & \multicolumn{2}{c}{FM} &\multicolumn{2}{c}{CM} 
 &\multicolumn{2}{c}{CR} \\ \hline
@@ -1377,23 +1394,22 @@ $R^2$  & \multicolumn{2}{c}{0.10} & \multicolumn{2}{c}{0.10}
 $N$  & \multicolumn{2}{c}{820}   &  \multicolumn{2}{c}{820} 
 &  \multicolumn{2}{c}{820} \\ \hline}
 \normalsize
-\newpage
+\clearpage
 
 %%%%%%%%%% Hypothesis Tests  %%%%%%%%%%%%
 
 \footnotesize
 \ctable[
-	cap = {Hypothesis tests},
-	caption = {Hypothesis tests},
+	cap = {Hypothesis Tests},
+	caption = {\textbf{Hypothesis Tests}},
 	captionskip = -2ex,
 	pos = htbp,
 	label = tests
 ]{lrrrrrr}{
-          \tnote[a]{P-values $<$0.01, 0.05, and 0.10 correspond to $^{***}$, 
-          $^{**}$, and $^{*}$, respectively.}
-	\tnote[b]{The subscripts $1, 2, 3, 4$, and $5$ refer to titled area, labor, 
-	dependents, experience, and education, respectively.}
-           \tnote[c]{Marginal effects are calculated at sample means.}
+          \tnote[]{Note: P-values $<$0.01, 0.05, and 0.10 correspond to $^{***}$, 
+          $^{**}$, and $^{*}$, respectively. The subscripts $1, 2, 3, 4$, and $5$ 
+          refer to titled area, labor, dependents, experience, and education, 
+          respectively. Marginal effects are calculated at sample means.}
 }{ \hline \hline
 Hypothesis Test & \multicolumn{1}{c}{FM} &\multicolumn{1}{c}{CM}  
 &\multicolumn{1}{c}{CR} \\ \hline
@@ -1407,22 +1423,24 @@ Hypothesis Test & \multicolumn{1}{c}{FM} &\multicolumn{1}{c}{CM}
 (8)~ $\partial/\partial \ln x_4$    &    3.92  &  10.61 & 9.64 \\[-1ex]
 (9)~ $\partial/\partial \ln x_5$    &  -0.58   & -3.38 &  3.66 \\ \hline}
 \normalsize
+\clearpage
 
 %%%%%%%% Operated vs. Growth   %%%%%%%%
 
-\begin{figure}[tbp]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=1\textwidth]{Predicted_Growth.pdf}
-\caption{Predicted growth and land operated}
+\includegraphics[width=0.75\textwidth]{Predicted_Growth.pdf}
+\caption{\textbf{Predicted growth and land operated}}
 \label{fig: pgrowth}
 \end{figure}
+\clearpage
 
 %%%%%%%%%% Experiment   %%%%%%%%%%
 
-\begin{figure}[tbp]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=1\textwidth]{Predicted_Growth(Experiment).pdf}
-\caption{Predicted growth pre- and post-reform}
+\includegraphics[width=0.75\textwidth]{Predicted_Growth(Experiment).pdf}
+\caption{\textbf{Predicted growth pre- and post-reform}}
 \label{fig: experiment}
 \end{figure}
 
