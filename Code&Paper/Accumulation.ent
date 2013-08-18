@@ -553,10 +553,9 @@ concentrated.
 \@endanenote 
 \@doanenote {14}
 macro:->See
-Section
-\ref
+``\nameref
 {sec:
-methodology}
+methodology}''
 for
 a
 detailed
@@ -573,10 +572,9 @@ hypotheses
 put
 forth
 in
-Section
-\ref
+``\nameref
 {sec:
-theories}.
+theories}.''
 \@endanenote 
 \@doanenote {15}
 macro:->It
