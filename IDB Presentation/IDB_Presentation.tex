@@ -1,0 +1,580 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%            PREAMBLE          %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Outline (25-30 slides):
+% I. Introduction (2 slides) (Done)
+% II. Theoretical background (6 slides) 
+% III. Data (7-8 slides)
+% IV. Methodology (7-8 slides)
+% 	ADL model
+% 	OLS, FD, and IV model
+% 	Arellano-Bond estimator
+% 	Blundell-Bond estimator
+% 	Empirical model
+% 	Hypothesis tests
+% V. Results (3 slides) (Done)
+% VI. Conclusions (1 slide) (Done)
+
+\documentclass[xcolor=dvipsnames]{beamer} 
+\usecolortheme[named=Black]{structure} 
+\mode<presentation>{\usetheme{Classic}}
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage[authoryear]{natbib}
+\usepackage{ctable}
+\usepackage{setspace}
+\usepackage{longtable}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\setbeamertemplate{caption}[numbered]
+\setbeamerfont{caption}{size=\normalsize}
+\setbeamercolor{caption name}{fg=black}
+\setbeamercolor{item}{fg=black}
+\setlength{\extrarowheight}{2.5pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%           TITLE PAGE         %%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title[]{Land Accumulation Dynamics in Developing Country Agriculture}
+
+\author[]{Heath Henderson, Leonardo Corral, Eric Simning \\
+\emph{\footnotesize{
+Inter-American Development Bank}} \\
+~\\
+Paul Winters \\
+\emph{\footnotesize{American University}}}
+
+\begin{document}
+\def\newblock{\hskip .11em plus .33em minus .07em}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%           CONTENT         %%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Title slide
+\begin{frame}
+\titlepage
+\end{frame}
+
+% Introduction
+\begin{frame}{Introduction}
+\begin{itemize}
+\item The distribution of landholdings in developing countries is a 
+well-documented source of economic inefficiency.
+\par\pause\noindent \item While documentation of the consequences of 
+inequality is prevalent, the causes are less well understood.
+\par\pause\noindent \item Theories have invoked stochastic growth 
+processes, market imperfections, and/or institutional considerations, among 
+others.
+\par\pause\noindent \item With few exceptions such theories have not been 
+subject to empirical scrutiny.
+\par\pause\noindent \item Using unique panel data from Paraguay, we seek to 
+test the leading theories of land accumulation dynamics.
+\end{itemize}
+\end{frame}
+
+% Defining Land Accumulation
+\begin{frame}{Defining Land Accumulation}
+\begin{itemize}
+\item Land accumulation is ``\textit{\textbf{the acquisition or gradual 
+gathering of land use rights or land access for purposes of agricultural 
+production}}.''
+\par\pause\noindent \item This includes expansion of the farm unit via 
+legal or extralegal means.
+\par\pause\noindent \item As opposed to farm growth, land accumulation 
+appears less ambiguous as farm growth can occur along multiple dimensions.
+\par\pause\noindent \item The terms land accumulation and farm growth are, 
+however, used synonymously throughout.
+\end{itemize}
+\end{frame}
+
+% Outline
+\begin{frame}{Outline}
+\begin{enumerate}
+\item Theoretical considerations
+\item Paraguay background and data
+\item Methodology
+\item Results
+\item Conclusions
+\end{enumerate}
+\end{frame}
+
+% Theoretical Considerations
+\begin{frame}{Theoretical Considerations}
+\begin{enumerate}
+\item Stochastic growth processes
+\item Factor market imperfections
+\item Institutional/legal considerations
+\item Life cycle hypothesis
+\item Managerial experience
+\item Human capital
+\end{enumerate}
+\end{frame}
+
+% Stochastic growth processes
+\begin{frame}{Stochastic growth processes}
+\begin{itemize}
+\item The earliest and most influential of such theories is known as
+``Gibrat's Law of Proportionate Effects'' (Gibrat, 1931).
+\par\pause\noindent \item Let $x_t$ denote firm size at time $t$ and 
+the random variable $\varepsilon_t$ denote the growth rate such that 
+$x_t = x_{t-1}(1 + \varepsilon_t)$. 
+\par\pause\noindent \item It follows that $\log(x_t) \approx 
+\log(x_{0}) + \varepsilon_1 + \varepsilon_2 + \ldots + \varepsilon_t$. 
+\par\pause\noindent \item Assuming $\varepsilon$ is i.i.d.\ with mean 
+$\mu$ and variance $\sigma^2$, as $t \to \infty$ the distribution of 
+$\log(x_t)$ is approximately normal.
+\par\pause\noindent \item The central testable hypothesis is that firm 
+growth is independent of initial firm traits, most notably firm size.
+\end{itemize}
+\end{frame}
+
+% Factor Market Imperfections
+\begin{frame}{Factor Market Imperfections}
+\begin{itemize}
+\item \citet{carter1993} focused on the role of labor and capital market 
+imperfections in rural land markets.
+\par\pause\noindent \item Given land endowments and market 
+imperfections, agents choose their optimal time allocation and purchased 
+inputs.
+\par\pause\noindent \item The reservations price for $\varepsilon$ 
+additional hectares of land is 
+\begin{equation*}
+\rho(T) = \sum_{t=1}^{\infty} \Delta_t(T)/[1 + \mu(T + \varepsilon)]^t
+\end{equation*}
+where $\Delta_t(T) = [\pi(T + \varepsilon) - \pi(T)]/\varepsilon $ and 
+$\mu(T + \varepsilon)$ is the shadow price of capital.
+\par\pause\noindent \item The central testable hypothesis is that farm 
+size is a significant determinant of farm growth.
+\end{itemize}
+\end{frame}
+
+% Institutional/Legal Considerations
+\begin{frame}{Institutional/Legal Considerations}
+\begin{itemize}
+\item \citet{carter1998} incorporated tenure insecurity into a similar land 
+market competitiveness model.
+\par\pause\noindent \item Letting $0 < \phi < 1$ denote the probability 
+that a household is dispossessed of its land, the reservation price is
+\begin{equation*}
+\rho(T) = \sum_{t=1}^{\infty} [(1 - \phi)^t \Delta_t(T, \phi)]/
+[1 + \mu(T + \varepsilon, \phi)]^t
+\end{equation*}
+\par\pause\noindent \item Three channels: (1) uncertainty-based 
+discounting; (2) factor allocations; and (3) credit supply effects.
+\par\pause\noindent \item The central testable hypothesis is that tenure 
+security is a significant determinant of land accumulation.
+\end{itemize}
+\end{frame}
+
+% Life Cycle Hypothesis
+\begin{frame}{Life Cycle Hypothesis}
+\begin{itemize}
+\item Chayanov (1966) suggested that land accumulation is intimately tied to 
+the growth of the individual family. 
+\par\pause\noindent \item Farm size adapts to the equilibrium income of 
+the household, as determined by balancing the marginal utility of income 
+($MU_I$) and marginal drudgery of labor ($MD_L$). 
+\par\pause\noindent \item  $MU_I$ depends on family consumption 
+demands and $MD_L$ depends on the size of the family work force.
+\par\pause\noindent \item In traversing the family life cycle, these curves 
+shift and influence farm size.
+\par\pause\noindent \item The central testable hypothesis is that household 
+labor and dependents are significant determinants of farm growth.
+\end{itemize}
+\end{frame}
+
+% Managerial Experience
+\begin{frame}{Managerial Experience}
+\begin{itemize}
+\item Jovanovic (1982) put forth a learning model where managerial 
+experience is key to firm growth.
+\par\pause\noindent \item Firms choose their output level $q_t$ to 
+maximize expected profits $p_t q_t - c(q_t)x_t^*$ where $x_t^*$ is the 
+expectation of $x_t$. 
+\par\pause\noindent \item There is an equilibrium scale of production for 
+mature firms as $x_t^*$ converges to a constant as firms age.
+\par\pause\noindent \item While younger firms have more variable 
+growth rates, Jovanovic demonstrated that they will grow faster.
+\par\pause\noindent \item The central testable hypothesis is that there 
+exists an inverse relationship between firm growth and firm age.
+\end{itemize}
+\end{frame}
+
+% Human Capital
+\begin{frame}{Human Capital}
+\begin{itemize}
+\item Rodgers (1994) emphasized the effects of human capital on land 
+accumulation. 
+\par\pause\noindent \item Let $x$ denote agriculture-specific human 
+capital and $y$ denote general human capital.
+\par\pause\noindent \item Given these endowments, agents choose to 
+engage in agricultural production or off-farm employment.
+\par\pause\noindent \item Off-farm income $w$ is an increasing 
+function of $y$ and agricultural income $m$ is an increasing function 
+of $x$.
+\par\pause\noindent \item The central testable hypothesis is that human 
+capital is a significant determinant of farm growth.
+\end{itemize}
+\end{frame}
+
+% Paraguay Background
+\begin{frame}{Paraguay Background}
+\begin{itemize}
+\item Paraguay, with a GDPPC of \$2,967 and a poverty rate of 38 percent, 
+is among the poorest countries in Latin America.
+\par\pause\noindent \item Agriculture accounts for 24 percent of GDP, 
+27 percent of employment, and 87 percent of merchandise exports.
+\par\pause\noindent \item With a Gini coefficient of 0.93, the distribution 
+of land is one of the most inegalitarian in the world.
+\par\pause\noindent \item Approximately 27 percent of producers do not 
+have legal rights over the land they operate.
+\end{itemize}
+\end{frame}
+
+% Paraguay Background
+\begin{frame}{Paraguay Background}
+\begin{itemize}
+\item The concentration of landholdings is largely grounded in the aftermath 
+of the War of the Triple Alliance (1864-1870).
+\par\pause\noindent \item The Stroessner regime (1954-1989) enacted the 
+Agrarian Statute of 1963 and embarked on a large-scale colonization program.
+\par\pause\noindent \item Land issues became firmly established on the 
+national political agenda after the fall of the Stroessner regime in 1989.
+\par\pause\noindent \item The Constitution of 1992 and Agrarian Statute 
+of 2002 left land redistribution to market forces and reflects the emergence 
+of liberal democratic values.
+\end{itemize}
+\end{frame}
+
+% Paraguay Background
+\begin{frame}{Paraguay Background}
+\footnotesize
+\ctable[
+cap = {Distribution of Farms by Farm Size},
+caption = {Distribution of Farms by Farm Size},
+captionskip = -1.5ex,
+pos=htb,
+label = {distfl}
+]{lrrrr}{
+\tnote[]{}
+}{\hline \hline
+& \multicolumn{1}{c}{1956} & 
+ \multicolumn{1}{c}{1981} & 
+\multicolumn{1}{c}{1991} & 
+\multicolumn{1}{c}{2008} \\ \hline
+0-5 ha             & 45.9  & 36.0  & 40.0 &   40.5  \\
+5-10 ha               & 23.4  & 19.9  & 21.7 &   22.9 \\
+10-100 ha         & 27.4   & 40.0 & 34.3 &   30.2  \\
+100-500 ha         & 1.9    & 2.8    & 2.7 &      3.6  \\
+500-1,000 ha      &  0.4   & 0.4    & 0.5 &      0.9  \\
+1,000-10,000 ha  & 0.8   & 0.8    & 0.9  &     1.4  \\
+$>10,000$ ha    & 0.2    & 0.1    & 0.1  &    0.2   \\
+Total              & 100.0 & 100.0 & 100.0 & 100.0 \\
+Number of farms  & 149,614 & 248,930 & 307,221 & 289,649 \\ \hline
+}
+\end{frame}
+
+% LTC-CPES Data
+\begin{frame}{LTC-CPES Data}
+\begin{itemize}
+\item In 1991, the Land Tenure Center (LTC) at the University of 
+Wisconsin-Madison and the \emph{Centro Paraguayo de Estudios 
+Sociol\'{o}gicos} (CPES) administered surveys to 300 rural Paraguayan 
+households.
+\par\pause\noindent  \item The households were selected in accordance 
+with a multi-stage random sampling framework where households were 
+stratified by region and farm size.
+\par\pause\noindent \item The LTC-CPES survey is panel in nature 
+and was further administered in the years 1994, 1999, 2002, and 2007. 
+\par\pause\noindent \item The panel is unbalanced with 300, 284, 293, 
+223, and 446 reliable observations across the five years, respectively. 
+\end{itemize}
+\end{frame}
+
+% LTC-CPES Data
+\begin{frame}{LTC-CPES Data}
+\scriptsize
+\ctable[
+	cap = {Variable Definitions},
+	caption = {Variable Definitions},
+	captionskip = -1.5ex,
+	pos = htbp,
+	label = defs
+]{ll}{
+          \tnote[]{}
+}{ \hline \hline
+Variable & Definition \\ \hline
+Land Operated ($y$) & Land owned plus land rented, sharecropped, or 
+borrowed \\
+& \emph{from} others less land rented, sharecropped, or borrowed 
+\emph{to} \\
+& others (ha) \\
+Titled Area ($x_1$) & Quantity of land owned with legally registered, 
+mortgageable \\
+& property rights (ha)\\
+Labor ($x_2$)  & Number of household members ages 15 to 64 \\
+Dependents ($x_3$) & Number of household members younger than 15 or 
+older \\
+& than 64 years of age \\ 
+Experience ($x_4$) & Age of the household head less years of education of 
+the \\
+& household head less six years \\ 
+Education ($x_5$) & Years of education of the household head \\ \hline}
+\end{frame}
+
+% LTC-CPES Data
+\begin{frame}{LTC-CPES Data}
+\begin{figure}[htb]
+    \centering
+     \includegraphics[scale=0.60]{Land.pdf}
+     \caption{Mean farm size by cohort and year}
+\end{figure}
+\end{frame}
+
+% Methodology
+\begin{frame}{Methodology}
+\begin{itemize}
+\item Consider the following autoregressive-distributed lag model: 
+\begin{equation*}
+y_{i,t} = \beta_1 y_{i,t-1} + \beta_2 x_{i,t} + \alpha_i +  u_{i,t}
+\end{equation*}
+for $i=1,2,\ldots, N$ and $t=2,3,\ldots,T$.
+\par\pause\noindent \item The error term $u_{i,t}$ is assumed to be serially 
+uncorrelated and independent across producers.
+\par\pause\noindent \item OLS? The lagged dependent variable is correlated 
+with $\alpha_i +  u_{i,t}$ so OLS is inconsistent.
+\par\pause\noindent \item Within Groups? Let's see \ldots 
+\end{itemize}
+\end{frame}
+
+% Methodology
+\begin{frame}{Methodology}
+\begin{itemize}
+\item The transformed lagged dependent variable is
+\begin{equation*}
+y_{i,t-1} - \frac{1}{T-1}(y_{i,1} + \ldots + y_{i,t} + \ldots + y_{i,T-1})
+\end{equation*}
+\par\pause\noindent \item The transformed error term is
+\begin{equation*}
+u_{i,t} - \frac{1}{T-1}(u_{i,2} + \ldots + u_{i,t-1} + \ldots + u_{i,T})
+\end{equation*}
+\par\pause\noindent \item Due to the correlation between the two 
+transformed terms, the Within Groups estimator is also inconsistent.
+\par\pause\noindent \item What about first-differencing?
+\end{itemize}
+\end{frame}
+
+% Methodology
+\begin{frame}{Methodology}
+\begin{itemize}
+\item The first-difference model is as follows:
+\begin{equation*}
+\Delta y_{i,t} = \beta_1 \Delta y_{i,t-1} + \beta_2 \Delta x_{i,t} 
++ \Delta u_{i,t}
+\end{equation*}
+where $\Delta y_{i,t-1}= y_{i,t-1} - y_{i,t-2}$ and $\Delta u_{i,t} = 
+u_{i,t} - u_{i,t-1}$ for $i=1,\ldots,N$ and $t=3,\ldots,T$.
+\par\pause\noindent \item OLS estimation of the first-difference model 
+is inconsistent.
+\par\pause\noindent \item First-differencing does not introduce all 
+realizations of the disturbances ($u_{i,2}, \ldots, u_{i,T}$) into the 
+transformed error. 
+\par\pause\noindent \item 2SLS? Yes, with $y_{i, t-2}$ as an instrument 
+2SLS is consistent in large $N$, fixed $T$ panels 
+(Anderson and Hsiao, 1982).
+\end{itemize}
+\end{frame}
+
+% Methodology
+\begin{frame}{Methodology}
+\begin{itemize}
+\item 2SLS is, however, not efficient as it generally does not utilize all 
+available moment conditions.
+\par\pause\noindent \item \citet{arellano1991} noted that for $T>3$ 
+additional instruments are available (e.g.\ $y_{i, t-3}$ when $T=4$).
+\par\pause\noindent \item The authors developed a GMM estimator in 
+an effort to remedy the shortcomings of 2SLS.
+\par\pause\noindent \item In the context of a simple autoregressive 
+model (i.e.\ $\beta_2=0$), the instrument matrix can be written as follows:
+\begin{equation*}
+Z_i = \left[ 
+\scriptsize
+\begin{array}{ccccccc}
+y_{i,1} & 0 & 0 & 0 & 0 & 0 & \cdots   \\\
+0 & y_{i,1} & y_{i,2} & 0 & 0 & 0 & \cdots   \\\
+0 & 0 & 0 & y_{i,1} & y_{i,2} & y_{i,3} & \cdots  \\\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots
+\end{array}
+\right] 
+\end{equation*}
+\end{itemize}
+\end{frame}
+
+% Methodology
+\begin{frame}{Methodology}
+\begin{itemize}
+\item $Z_i$ can also be ``collapsed'' as follows:
+\begin{equation*}
+\left[ 
+\scriptsize
+\begin{array}{ccccccc}
+y_{i,1} & 0 & 0 & \cdots   \\\
+y_{i,1} & y_{i,2} & 0 & \cdots   \\\
+y_{i,1} & y_{i,2} & y_{i,3} & \cdots  \\\
+\vdots & \vdots & \vdots & \ddots
+\end{array}
+\right]
+\end{equation*}
+\par\pause\noindent \item The above is readily generalized to the case 
+of the autoregressive-distributed lag model.
+\par\pause\noindent \item The efficient GMM estimator exploits the 
+moment conditions $E[Z_i' \Delta u_i]=0$ for $i=1,2,\ldots,N$ to 
+minimize
+\begin{equation*}
+J_N = \left(\frac{1}{N} \sum_{i=1}^N \Delta u_{i}^{\prime} Z_i \right) 
+W_N \left(\frac{1}{N} \sum _{i=1}^N Z_i' \Delta u_i\right)
+\end{equation*}
+\end{itemize}
+\end{frame}
+
+% Methodology
+\begin{frame}{Methodology}
+\begin{itemize}
+\item \citet{blundell1998} noted that when the series in question has near 
+unit root properties, the utilized instruments are likely to be weak.
+\par\pause\noindent \item Past changes may be more predictive of current 
+levels than past levels are of current changes.
+\par\pause\noindent \item The authors suggested utilizing the additional 
+$T-2$ moment conditions $E[\Delta y_{i,t-1} (\alpha_i + u_{i,t})]=0$ 
+for $i=1,2,\ldots,N$ and $t=3,4,\ldots,T$.
+\par\pause\noindent \item The ``system'' GMM estimator stacks the 
+$T-2$ equations in first-differences and the $T-2$ equations in levels.
+\end{itemize}
+\end{frame}
+
+% Methodology
+\begin{frame}{Methodology}
+\begin{itemize}
+\item For the simple autoregressive model, the augmented instrument matrix is 
+as follows:
+\begin{equation*}
+Z_{i}^{+} = \left[ 
+\scriptsize
+\begin{array}{ccccccc}
+Z_i  & 0 & 0 & 0 & \ldots \\
+0 & \Delta y_{i,2} & 0 & 0 & \ldots \\
+0 & 0 & \Delta y_{i,3} & 0 & \ldots  \\
+0 & 0 & 0 & \Delta y_{i,4} & \ldots  \\
+\vdots & \vdots & \vdots & \vdots & \ddots
+\end{array}
+\right] \text{or}
+\left[ 
+\scriptsize
+\begin{array}{ccccccc}
+Z_i  & 0  \\
+0 & \Delta y_{i,2}  \\
+0 & \Delta y_{i,3}  \\
+0 & \Delta y_{i,4}  \\
+\vdots & \vdots 
+\end{array}
+\right]
+\end{equation*}
+\par\pause\noindent \item The above is also readily generalized to the 
+case of the autoregressive-distributed lag model.
+\par\pause\noindent \item Estimation then consists of minimizing 
+$J_N$ after properly introducing the additional moment conditions. 
+\end{itemize}
+\end{frame}
+
+% Methodology
+\begin{frame}{Methodology}
+\begin{itemize}
+\item The following general specification is put forth here:
+\begin{equation*}
+\frac{\ln(y_{i,t}) - \ln(y_{i,t-1})}{\delta_t} \times 100 =  
+\ln [g(y_{i,t-1}, x_{i,t-1})]+ \alpha_i  + u_{i,t}
+\end{equation*}
+\par\pause\noindent \item Approximating the growth function $g(\cdot)$ 
+by a second-order expansion in the logs, the above can be estimated with the 
+``system'' GMM estimator.
+\par\pause\noindent \item Four assumptions: (1) serial correlation; (2) 
+instrumental exogeneity; (3) instrument count; and (4) attrition bias. 
+\end{itemize}
+\end{frame}
+
+% Results
+\begin{frame}
+\footnotesize
+\ctable[
+	cap = {Hypothesis Tests},
+	caption = {Hypothesis Tests},
+	captionskip = -1.5ex,
+	pos = htbp,
+	label = tests
+]{lrrrrrr}{
+          \tnote[]{Note: P-values $<$0.01, 0.05, and 0.10 correspond to $^{***}$, 
+          $^{**}$, and $^{*}$, respectively. The subscripts $1, 2, 3, 4$, and $5$ 
+          refer to titled area, labor, dependents, experience, and education, 
+          respectively. Marginal effects are calculated at sample means.}
+}{ \hline \hline
+Hypothesis Test & \multicolumn{1}{c}{FM} &\multicolumn{1}{c}{CM}  
+&\multicolumn{1}{c}{CR} \\ \hline
+(1)~ Arellano-Bond                      &     1.10   &   0.93 &  1.05    \\
+(2)~ Hansen                                 & 171.10   & 87.99 & 57.42 \\
+(3)~ Difference-in-Hansen           &   19.07   & 35.12 & 25.82 \\
+(4)~ $\partial/\partial \ln y$       &  -14.86***  & -10.16  & -10.74* \\
+(5)~ $\partial/\partial \ln x_1$   &   14.83*** &   10.62** & 10.43**\\
+(6)~ $\partial/\partial \ln x_2$   &     5.91* & 4.25 &  3.62 \\
+(7)~ $\partial/\partial \ln x_3$    &    2.10  & 1.54 &   2.60   \\
+(8)~ $\partial/\partial \ln x_4$    &    3.92  &  10.61 & 9.64 \\
+(9)~ $\partial/\partial \ln x_5$    &  -0.58   & -3.38 &  3.66 \\ \hline}
+\normalsize
+\clearpage
+\end{frame}
+
+% Results
+\begin{frame}{Results}
+\begin{figure}[htb]
+    \centering
+     \includegraphics[scale=0.60]{Predicted_Growth.pdf}
+     \caption{Predicted growth and land operated}
+\end{figure}
+\end{frame}
+
+% Results
+\begin{frame}{Results}
+\begin{figure}[htb]
+    \centering
+     \includegraphics[scale=0.60]{Predicted_Growth(Experiment).pdf}
+     \caption{Predicted growth pre- and post-reform}
+\end{figure}
+\end{frame}
+
+% Conclusions
+\begin{frame}{Conclusions}
+\begin{itemize}
+\item The results suggested that farm growth varies systematically with select 
+observable characteristics, implying a rejection of Gibrat's Law.
+\par\pause\noindent \item The signs associated with the statistically 
+significant effects empirically substantiated two of the hypotheses put forth.
+\par\pause\noindent \item The estimates suggested that a dualistic 
+agrarian structure is the likely product of the unfettered operation of land 
+markets.
+\par\pause\noindent \item Land titling interventions may possess the 
+capacity to reduce the rate at which inequality manifests.
+\end{itemize}
+\end{frame}
+
+% References
+\begin{frame}{Select References}
+\bibliographystyle{au-cms}
+\bibliography{/Users/hendersonhl/Documents/References}
+\end{frame}
+
+\end{document}
