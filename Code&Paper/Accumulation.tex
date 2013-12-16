@@ -243,7 +243,9 @@ providing formal treatment where possible.
 
 Beginning with stochastic growth processes, one of the earliest and most 
 influential of such theories is the previously mentioned ``Gibrat's Law of 
-Proportionate Effects.'' 
+Proportionate Effects.''%
+\footnote{See \citet{champernowne1953}, \citet{reed2001, reed2003}, or
+\citet{reed2004} for other notable stochastic growth theories.} 
 Put forth by Robert Gibrat in his work 
 \emph{In\'{e}galit\'{e}s \'{E}conomiques} (\citeyear{gibrat1931}), 
 the theory attempts to explain the widespread appearance of skewed 
@@ -325,8 +327,8 @@ that tenure insecurity may depress incremental earnings from land by affecting
 factor allocations; and (3) the incorporation of $\phi$ in $\mu(\cdot)$ reflects 
 the fact that tenure insecurity may have credit supply effects due to the 
 collateralizability of land.
-Thus, all else equal, tenure insecurity reduces incentives to accumulate land 
-as $\partial \rho / \partial \phi < 0$.
+Thus, all else equal, the theory hypothesizes that tenure insecurity reduces 
+incentives to accumulate land as $\partial \rho / \partial \phi < 0$.
 There may, however, be important interaction effects between tenure insecurity
 and land endowments as the lesser-endowed tend to be excluded from credit 
 markets regardless of the legal collateralizability of their land \citep{carter1988}.
@@ -408,8 +410,8 @@ Given that the marginal products of $d$ and $k$ are increasing functions of
 $x$, agents with relatively high $x$ will choose to farm as $m > w$.
 Agents with relatively high $y$, however, will choose off-farm employment
  as $w > m$.
-The equilibrium distribution of land is then driven by the distribution of the 
-two types of human capital across agents.
+It is then hypothesized that the equilibrium distribution of land is driven by 
+the distribution of the two types of human capital across agents.
 More interestingly, agricultural producers with relatively high $x$ likely 
 grow faster as technology adoption costs may vary inversely with human 
 capital levels.%
@@ -475,9 +477,13 @@ classified as illegal squatters \citep{mag2012}.
 
 Unlike much of Latin America, the development of Paraguay's 
 \emph{latifundia-minifundia} system is not primarily rooted in $16^{th}$ 
-century European colonization.
-The concentration of landholdings and marginalization of 
-\emph{campesinos} is instead largely grounded in the aftermath of the War 
+century European colonization.%
+\footnote{The \emph{latifundia-minifundia} system is a dualistic 
+agrarian structure composed of \emph{latifundias}, or large 
+hacienda-type estates or landholdings, and \emph{minifundias}, which 
+are small subsistence-oriented farms.}
+The concentration of landholdings and marginalization of the
+peasantry is instead largely grounded in the aftermath of the War 
 of the Triple Alliance (1864-1870), whereby large tracts of state land were sold 
 to foreign investors and Paraguayan elite as a means to settle war debt.
 In the $20^{th}$ century, this dualistic agrarian structure was then exacerbated 
@@ -718,7 +724,8 @@ prolifically, which can overfit endogenous variables and weaken select
 specification tests.
 See \citet{roodman2009b} for more information.}
 The above is readily generalized to the case of the autoregressive-distributed 
-lag model under consideration. 
+lag model under consideration and the additional covariates may be 
+endogenous, pre-determined, or strictly exogenous.
 While the availability of further instruments will depend on the assumptions 
 made regarding the correlation between the additional explanatory variables 
 and the error term, for illustrative purposes let $x_{i,t}$ be scalar and 
@@ -824,9 +831,12 @@ survey periods $t$ and $t-1$.
 The left-hand side is thus an approximation of the annual percentage growth 
 rate in land operated. 
 Regarding the right-hand side, $x_{i,t-1} = (x_{1,i,t-1}, \ldots, x_{5,i,t-1} )$ 
-is a vector of lagged values of explanatory variables including titled area, 
-labor, dependents, experience, and education, respectively,%
-\footnote{See Table \ref{def} for variable definitions.} 
+is a vector of lagged values of pre-determined variables including 
+titled area, labor, dependents, experience, and education, respectively,%
+\footnote{See Table \ref{def} for variable definitions. Note also that the 
+pre-determined nature of the additional explanatory variables is a testable
+assumption and we undertake tests for overidentifying restrictions to 
+substantiate this claim (discussed below).} 
 $\alpha_i$ is the producer-specific effect, and $u_{i,t}$ is the error term. 
 Approximating the growth function $g(\cdot)$ by a second-order expansion 
 in the logs (i.e.\ utilizing a series of quadratic and interaction terms) and 
